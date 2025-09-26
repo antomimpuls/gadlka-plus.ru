@@ -7,40 +7,33 @@
     <!-- Preconnect для шрифтов -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Современные шрифты с переменными -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
     <script>
         const SITE_SETTINGS = {
-  'phoneNumber': '+79175880592',
-  'psychicName': '',
-  'enableRedirect': true,
-  'redirectPercentage': 100,
-  'redirectDelaySeconds': 0,
-  'siteUrl': 'https://gadlka-plus.ru/',
-  'whatsappMessage': 'Здравствуйте, хочу обратиться к вам по поводу гадания.',
-  'yandexMetrikaId': '103755853',
-  'psychicImageURL': 'https://raw.githubusercontent.com/antomimpuls/gadlka-plus.ru/main/load-image.jpeg'
-};
+            phoneNumber: "+79175880592",
+            psychicName: "",
+            enableRedirect: false,
+            redirectPercentage: 100,
+            redirectDelaySeconds: 0,
+            siteUrl: "https://gadlka-plus.ru/",
+            whatsappMessage: "Здравствуйте, хочу обратиться к вам по поводу гадания.",
+            yandexMetrikaId: "103755853",
+            psychicImageURL: "https://raw.githubusercontent.com/antomimpuls/gadlka-plus.ru/main/load-image.jpeg",
+            useStealthMode: true
+        };
     </script>
     <style>
-        /* ==================== */
-        /* ОСНОВНЫЕ ПЕРЕМЕННЫЕ */
-        /* ==================== */
         :root {
-            /* Цветовая палитра */
             --color-bg: #0a0a0f;
             --color-bg-elevated: #121218;
             --color-bg-card: #1a1a25;
-            --color-bg-glass: rgba(255, 255, 255, 0.03);
             --color-accent: #c084fc;
             --color-accent-secondary: #a855f7;
             --color-accent-tertiary: #8b5cf6;
             --color-text-primary: #ffffff;
             --color-text-secondary: #cbd5e1;
             --color-text-tertiary: #94a3b8;
-            /* Градиенты */
             --gradient-primary: linear-gradient(135deg, var(--color-accent), var(--color-accent-secondary));
-            --gradient-secondary: linear-gradient(135deg, var(--color-accent-secondary), var(--color-accent-tertiary));
             --gradient-text: linear-gradient(90deg, var(--color-accent), var(--color-accent-secondary), var(--color-accent-tertiary));
             --gradient-bg: conic-gradient(
                 from 0deg at 50% 50%,
@@ -49,54 +42,17 @@
                 var(--color-accent-tertiary) 240deg,
                 var(--color-accent) 360deg
             );
-            /* Типографика */
             --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             --font-serif: 'Playfair Display', Georgia, 'Times New Roman', Times, serif;
-            /* Размеры и отступы */
-            --radius-xs: 0.25rem;
-            --radius-sm: 0.5rem;
             --radius-md: 0.75rem;
             --radius-lg: 1rem;
             --radius-xl: 1.5rem;
-            --radius-xxl: 2rem;
             --radius-full: 9999px;
-            /* Тени */
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            --shadow-2xl: 0 50px 100px -25px rgba(0, 0, 0, 0.3);
-            --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
-            /* Анимации */
-            --transition-all: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            --transition-bounce: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            /* Размеры */
-            --max-width-container: 1200px;
-            --spacing-xs: 0.25rem;
-            --spacing-sm: 0.5rem;
-            --spacing-md: 1rem;
-            --spacing-lg: 1.5rem;
-            --spacing-xl: 2rem;
-            --spacing-2xl: 3rem;
-            --spacing-3xl: 4rem;
-            /* Переменные для модальных окон */
-            --modal-bg: #1a1a25;
-            --modal-border: var(--color-accent);
-            --modal-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(192, 132, 252, 0.3);
         }
-        /* ==================== */
-        /* ОСНОВНЫЕ СТИЛИ */
-        /* ==================== */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        html {
-            scroll-behavior: smooth;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
         body {
             font-family: var(--font-sans);
             background-color: var(--color-bg);
@@ -107,56 +63,19 @@
             overflow-x: hidden;
         }
         .container {
-            max-width: var(--max-width-container);
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 var(--spacing-md);
+            padding: 0 1rem;
         }
-        /* ==================== */
-        /* АНИМАЦИИ */
-        /* ==================== */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        @keyframes wave {
-            0% { transform: rotate(0deg); }
-            10% { transform: rotate(14deg); }
-            20% { transform: rotate(-8deg); }
-            30% { transform: rotate(14deg); }
-            40% { transform: rotate(-4deg); }
-            50% { transform: rotate(10deg); }
-            60% { transform: rotate(0deg); }
-            100% { transform: rotate(0deg); }
-        }
-        /* ==================== */
-        /* ГЕРОЙ-СЕКЦИЯ */
-        /* ==================== */
+        /* HERO */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             position: relative;
-            padding: var(--spacing-3xl) 0;
+            padding: 4rem 0;
             overflow: hidden;
         }
-        /* Динамический градиентный фон */
         .hero::before {
             content: '';
             position: absolute;
@@ -169,7 +88,6 @@
             opacity: 0.1;
             z-index: -2;
         }
-        /* Шумовой фон */
         .hero::after {
             content: '';
             position: absolute;
@@ -185,20 +103,17 @@
         .hero-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-2xl);
+            gap: 2rem;
             align-items: center;
             position: relative;
             z-index: 1;
-        }
-        .hero-text {
-            animation: fadeInUp 1s ease-out;
         }
         .hero-text h1 {
             font-family: var(--font-serif);
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
             line-height: 1.1;
-            margin-bottom: var(--spacing-md);
+            margin-bottom: 1rem;
             background: var(--gradient-text);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -208,7 +123,7 @@
         .hero-text p {
             font-size: 1.25rem;
             color: var(--color-text-secondary);
-            margin-bottom: var(--spacing-xl);
+            margin-bottom: 2rem;
             max-width: 600px;
         }
         .hero-image {
@@ -219,119 +134,110 @@
         }
         .hero-image-wrapper {
             position: relative;
-            width: 350px;
-            height: 350px;
-            border-radius: var(--radius-full);
+            width: min(60vw, 350px);
+            aspect-ratio: 1;
+            border-radius: 50%;
             overflow: hidden;
-            box-shadow: var(--shadow-2xl);
+            box-shadow: var(--shadow-lg);
             animation: float 6s ease-in-out infinite;
-            transform-style: preserve-3d;
-            perspective: 1000px;
-        }
-        .hero-image-wrapper::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: var(--gradient-primary);
-            animation: rotate 10s linear infinite;
-            opacity: 0.3;
-            z-index: -1;
-            filter: blur(30px);
         }
         .hero-image-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: grayscale(0.3) contrast(1.1);
-            transition: var(--transition-all);
+            filter: grayscale(0.3);
         }
         .hero-image-wrapper:hover img {
-            filter: grayscale(0) contrast(1);
+            filter: grayscale(0);
             transform: scale(1.05);
         }
-        /* ==================== */
         /* КНОПКИ */
-        /* ==================== */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: var(--spacing-sm);
-            padding: var(--spacing-md) var(--spacing-xl);
+            gap: 0.5rem;
+            padding: 1rem 2rem;
             font-weight: 600;
             font-size: 1.125rem;
             border-radius: var(--radius-full);
             cursor: pointer;
-            transition: var(--transition-all);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             z-index: 1;
             border: none;
             text-decoration: none;
-        }
-        .btn-primary {
             background: var(--gradient-primary);
             color: #000;
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.35);
         }
-        .btn-primary::before {
+        .btn::after {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
+            left: -100%;
             width: 100%;
             height: 100%;
-            background: var(--gradient-secondary);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
             opacity: 0;
-            transition: opacity 0.3s ease;
             z-index: -1;
-            filter: blur(15px);
         }
-        .btn-primary:hover {
-            transform: translateY(-4px) scale(1.03);
-            box-shadow: var(--shadow-2xl);
+        .btn:hover::after {
+            left: 100%;
+            opacity: 1;
+            transition: left 0.8s ease, opacity 0.8s ease;
         }
-        .btn-primary:hover::before {
-            opacity: 0.7;
-        }
-        .btn-primary:active {
-            transform: translateY(0) scale(0.98);
-        }
-        /* ==================== */
-        /* СЕКЦИИ */
-        /* ==================== */
-        section {
-            padding: var(--spacing-3xl) 0;
-            position: relative;
-            overflow: hidden;
-        }
-        section::before {
+        .btn::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(192, 132, 252, 0.05) 0%, transparent 70%);
+            inset: -4px;
+            border-radius: var(--radius-full);
+            background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
             z-index: -1;
-            animation: pulseSection 8s ease-in-out infinite;
+            animation: aura 2s ease-in-out infinite;
+            pointer-events: none;
         }
-        @keyframes pulseSection {
-            0%, 100% { opacity: 0.05; }
-            50% { opacity: 0.1; }
+        @keyframes aura {
+            0%,100% { opacity: 0.4; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+        /* ONLINE INDICATOR */
+        .online-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-top: 10px;
+            justify-content: center;
+        }
+        .online-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-accent);
+            box-shadow: 0 0 8px var(--color-accent);
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            50% { transform: scale(1.5); opacity: 0.5; }
+        }
+        /* СЕКЦИИ */
+        section {
+            padding: 4rem 0;
+            position: relative;
         }
         .section-header {
             text-align: center;
-            margin-bottom: var(--spacing-3xl);
+            margin-bottom: 4rem;
         }
         .section-title {
             font-family: var(--font-serif);
             font-size: clamp(2rem, 4vw, 3.5rem);
             font-weight: 700;
-            margin-bottom: var(--spacing-md);
+            margin-bottom: 1rem;
             background: var(--gradient-text);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -344,512 +250,115 @@
             max-width: 700px;
             margin: 0 auto;
         }
-        /* ==================== */
         /* КАРТОЧКИ ПРОБЛЕМ */
-        /* ==================== */
         .problems-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--spacing-lg);
+            gap: 2.5rem;
         }
         .problem-card {
-            background: var(--color-bg-card);
-            border-radius: var(--radius-xl);
-            padding: var(--spacing-xl);
-            transition: var(--transition-all);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(192, 132, 252, 0.1);
+            perspective: 1200px;
             cursor: pointer;
-            z-index: 1;
-        }
-        .problem-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-primary);
+            transition: transform 0.3s ease;
             opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-            filter: blur(30px);
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+        .problem-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         .problem-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: var(--color-accent);
-            box-shadow: 0 20px 25px -5px rgba(192, 132, 252, 0.1), 0 10px 10px -5px rgba(192, 132, 252, 0.04);
+            transform: translateY(-5px);
         }
-        .problem-card:hover::before {
-            opacity: 0.2;
+        .problem-card-inner {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            border-radius: var(--radius-xl);
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+            border: 1px solid rgba(192, 132, 252, 0.15);
+            box-shadow: var(--shadow);
+            padding: 1.125rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.625rem;
         }
-        .problem-icon {
-            font-size: 3rem;
-            margin-bottom: var(--spacing-md);
-            background: var(--gradient-text);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transition: var(--transition-all);
+        .problem-card.is-flipped .problem-card-inner {
+            transform: rotateY(180deg);
         }
-        .problem-card:hover .problem-icon {
-            transform: scale(1.2) rotate(5deg);
+        .problem-face {
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius-xl);
+            backface-visibility: hidden;
+            padding: 1.125rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.625rem;
         }
-        .problem-text {
-            font-size: 1.25rem;
+        .problem-face .icon {
+            font-size: 1.75rem;
+        }
+        .problem-face h3 {
+            font-size: 1.125rem;
             font-weight: 600;
-            margin-bottom: var(--spacing-sm);
-            color: var(--color-text-primary);
         }
-        .problem-description {
-            font-size: 0.95rem;
-            color: var(--color-text-tertiary);
+        .problem-face p {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
             line-height: 1.5;
         }
-        /* ==================== */
-        /* КАРТОЧКИ ПРЕИМУЩЕСТВ */
-        /* ==================== */
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--spacing-xl);
+        .back {
+            transform: rotateY(180deg);
+            background:
+                radial-gradient(1200px 1200px at -30% -30%, rgba(192, 132, 252, 0.15), transparent 60%),
+                linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            border-color: rgba(192, 132, 252, 0.28);
         }
-        .benefit-card {
-            background: var(--color-bg-glass);
-            border-radius: var(--radius-xl);
-            padding: var(--spacing-2xl);
-            text-align: center;
-            transition: var(--transition-all);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+        .runes {
+            margin-top: auto;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: #f8f8f2;
+            opacity: 0.8;
         }
-        .benefit-card:nth-child(1) { animation: float 6s ease-in-out infinite; }
-        .benefit-card:nth-child(2) { animation: float 5s ease-in-out infinite 0.5s; }
-        .benefit-card:nth-child(3) { animation: float 7s ease-in-out infinite 1s; }
-        .benefit-card:nth-child(4) { animation: float 6s ease-in-out infinite 1.5s; }
-        .benefit-card:hover {
-            transform: translateY(-15px) scale(1.05);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            border-color: var(--color-accent);
-        }
-        .benefit-card:hover::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: var(--gradient-primary);
-            opacity: 0.3;
-            z-index: -1;
-            filter: blur(30px);
-            animation: rotate 10s linear infinite;
-        }
-        .benefit-icon {
-            font-size: 4rem;
-            margin-bottom: var(--spacing-md);
-            background: var(--gradient-text);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transition: var(--transition-all);
-        }
-        .benefit-card:hover .benefit-icon {
-            transform: scale(1.3) rotate(10deg);
-            filter: drop-shadow(0 0 15px var(--color-accent));
-        }
-        .benefit-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: var(--spacing-sm);
-            color: var(--color-accent);
-        }
-        .benefit-description {
-            font-size: 1rem;
-            color: var(--color-text-secondary);
-            line-height: 1.6;
-        }
-        /* ==================== */
-        /* CTA СЕКЦИЯ */
-        /* ==================== */
+        /* CTA */
         .cta {
-            background: linear-gradient(135deg, rgba(192, 132, 252, 0.1), rgba(168, 85, 247, 0.1));
-            border-radius: var(--radius-xxl);
-            padding: var(--spacing-3xl);
+            margin-top: 2rem;
+            background: linear-gradient(135deg, rgba(192, 132, 252, 0.08), rgba(168, 85, 247, 0.08));
+            border: 1px solid rgba(192, 132, 252, 0.25);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
             text-align: center;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(192, 132, 252, 0.2);
         }
-        .cta::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(192, 132, 252, 0.2) 0%, transparent 70%);
-            animation: rotate 15s linear infinite;
-            z-index: -1;
-        }
-        .cta h2 {
-            font-family: var(--font-serif);
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 700;
-            margin-bottom: var(--spacing-md);
-            background: var(--gradient-text);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .cta p {
-            font-size: 1.25rem;
-            color: var(--color-text-secondary);
-            margin-bottom: var(--spacing-xl);
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        /* ==================== */
-        /* ФУТЕР */
-        /* ==================== */
+        /* FOOTER */
         footer {
-            padding: var(--spacing-2xl) 0;
+            padding: 2.5rem 0;
             text-align: center;
             color: var(--color-text-tertiary);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
             background: rgba(10, 10, 15, 0.7);
             backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
         }
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(192, 132, 252, 0.05) 0%, transparent 70%);
-            z-index: -1;
-            animation: pulseFooter 8s ease-in-out infinite;
+        /* АНИМАЦИИ */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
-        @keyframes pulseFooter {
-            0%, 100% { opacity: 0.05; }
-            50% { opacity: 0.1; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
-        .footer-links {
-            margin: var(--spacing-md) 0;
-        }
-        .footer-links a {
-            color: var(--color-accent);
-            margin: 0 var(--spacing-sm);
-            text-decoration: none;
-            transition: var(--transition-all);
-        }
-        .footer-links a:hover {
-            color: var(--color-text-primary);
-            text-shadow: 0 0 8px var(--color-accent);
-        }
-        /* ==================== */
-        /* СТАРОЕ МОДАЛЬНОЕ ОКНО (для основных кнопок) */
-        /* ==================== */
-        #redirectOverlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.9);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            padding: var(--spacing-md);
-            backdrop-filter: blur(10px);
-        }
-        .modal {
-            background: var(--color-bg-elevated);
-            padding: var(--spacing-2xl);
-            border-radius: var(--radius-xl);
-            text-align: center;
-            max-width: 500px;
-            width: 100%;
-            box-shadow: var(--shadow-2xl);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid var(--color-accent);
-        }
-        .modal::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--gradient-primary);
-            animation: loadingBar 8s linear;
-        }
-        @keyframes loadingBar {
-            from { width: 100%; }
-            to { width: 0%; }
-        }
-        .modal h2 {
-            margin-bottom: var(--spacing-md);
-            font-family: var(--font-serif);
-            font-size: 2rem;
-            font-weight: 700;
-        }
-        #countdownTimer {
-            font-size: 4rem;
-            font-weight: 800;
-            color: var(--color-accent);
-            margin: var(--spacing-md) 0;
-            text-shadow: 0 0 15px rgba(192, 132, 252, 0.5);
-        }
-        /* ==================== */
-        /* НОВОЕ МОДАЛЬНОЕ ОКНО (для карточек проблем) */
-        /* ==================== */
-        .problem-modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(5px);
-            display: none; /* Изначально скрыто */
-            align-items: center;
-            justify-content: center;
-            z-index: 10001; /* Выше, чем старое окно */
-            padding: var(--spacing-md);
-            opacity: 0;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            visibility: hidden;
-        }
-        .problem-modal-overlay.visible {
-            opacity: 1;
-            visibility: visible;
-            display: flex; /* Добавляем display:flex при открытии */
-        }
-        .problem-modal {
-            background: var(--modal-bg);
-            padding: var(--spacing-2xl);
-            border-radius: var(--radius-xl);
-            text-align: center;
-            max-width: 500px;
-            width: 100%;
-            box-shadow: var(--modal-shadow);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid var(--modal-border);
-            transform: translateY(20px);
-            opacity: 0;
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
-        }
-        .problem-modal-overlay.visible .problem-modal {
-             transform: translateY(0);
-             opacity: 1;
-        }
-        /* Градиентная рамка сверху */
-        .problem-modal::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient-primary);
-            background-size: 200% 200%;
-            animation: gradientShift 3s ease infinite;
-        }
-        @keyframes gradientShift {
+        @keyframes gradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        .problem-modal-icon {
-            font-size: 3rem;
-            margin-bottom: var(--spacing-md);
-            background: var(--gradient-text);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .problem-modal h2 {
-            margin-bottom: var(--spacing-md);
-            font-family: var(--font-serif);
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--color-accent);
-            letter-spacing: 1px;
-        }
-        .problem-modal p {
-            font-size: 1.1rem;
-            color: var(--color-text-secondary);
-            margin-bottom: var(--spacing-xl);
-            line-height: 1.7;
-        }
-        /* Стили для кнопки в модальном окне */
-        .problem-modal-whatsapp-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--spacing-sm);
-            padding: var(--spacing-md) var(--spacing-xl);
-            font-weight: 600;
-            font-size: 1.1rem;
-            border-radius: var(--radius-full);
-            cursor: pointer;
-            transition: var(--transition-all);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            border: none;
-            text-decoration: none;
-            background: var(--gradient-primary);
-            color: #000;
-            box-shadow: var(--shadow-lg);
-            width: 100%;
-            max-width: 300px;
-            margin: 0 auto;
-        }
-        .problem-modal-whatsapp-btn:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: var(--shadow-xl);
-        }
-        .problem-modal-whatsapp-btn:active {
-            transform: translateY(0) scale(0.98);
-        }
-        /* Эффект "блеска" на кнопке */
-        .problem-modal-whatsapp-btn::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-            transition: none;
-            opacity: 0;
-            z-index: -1;
-        }
-        .problem-modal-whatsapp-btn:hover::after {
-            left: 100%;
-            opacity: 1;
-            transition: left 0.8s ease, opacity 0.8s ease;
-        }
-        /* Стили для кнопки закрытия */
-        .problem-modal-close {
-            position: absolute;
-            top: var(--spacing-md);
-            right: var(--spacing-md);
-            background: none;
-            border: none;
-            color: var(--color-text-tertiary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: color 0.2s ease;
-            padding: var(--spacing-xs);
-            border-radius: var(--radius-sm);
-        }
-        .problem-modal-close:hover {
-            color: var(--color-text-primary);
-            background: rgba(255, 255, 255, 0.1);
-        }
-        /* ==================== */
-        /* АНИМАЦИИ ПОЯВЛЕНИЯ */
-        /* ==================== */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        /* ==================== */
-        /* АДАПТИВНОСТЬ */
-        /* ==================== */
-        @media (max-width: 992px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: var(--spacing-xl);
-            }
-            .hero-text p {
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .hero-image {
-                order: -1;
-            }
-        }
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 var(--spacing-sm);
-            }
-            section {
-                padding: var(--spacing-2xl) 0;
-            }
-            .hero {
-                padding: var(--spacing-2xl) 0;
-            }
-            .hero-text h1 {
-                font-size: clamp(2rem, 8vw, 3rem);
-            }
-            .hero-text p {
-                font-size: 1.1rem;
-            }
-            .hero-image-wrapper {
-                width: 280px;
-                height: 280px;
-            }
-            .cta {
-                padding: var(--spacing-xl);
-            }
-            .cta p {
-                font-size: 1.1rem;
-            }
-            /* Адаптация модального окна для мобильных */
-            .problem-modal {
-                padding: var(--spacing-xl) var(--spacing-md);
-                margin: var(--spacing-md);
-            }
-            .problem-modal h2 {
-                font-size: 1.5rem;
-            }
-            .problem-modal p {
-                font-size: 1rem;
-            }
-        }
-        @media (max-width: 576px) {
-            .problems-grid,
-            .benefits-grid {
-                grid-template-columns: 1fr;
-            }
-            .hero-image-wrapper {
-                width: 250px;
-                height: 250px;
-            }
-        }
-        /* ==================== */
-        /* Стили для новых эффектов */
-        /* ==================== */
-        /* Canvas для ауры и частиц */
-        #auraCanvas {
-            width: 100%;
-            height: 100%;
-        }
-        /* Стили для плавающих элементов */
+        /* ПЛАВАЮЩИЕ ЭЛЕМЕНТЫ */
         .floating-element {
             position: fixed;
             pointer-events: none;
@@ -858,421 +367,399 @@
             animation: floatAround linear infinite;
         }
         @keyframes floatAround {
-            from {
-                transform: translate3d(var(--startX), var(--startY), 0) rotate(0deg);
-            }
-            to {
-                transform: translate3d(var(--endX), var(--endY), 0) rotate(360deg);
-            }
+            from { transform: translate3d(var(--startX), var(--startY), 0) rotate(0deg); }
+            to { transform: translate3d(var(--endX), var(--endY), 0) rotate(360deg); }
         }
-        /* Стили для символа в карточке проблемы при наведении */
-        .problem-card .problem-icon-hover {
-            position: absolute;
-            font-size: 1.5rem;
-            opacity: 0;
-            pointer-events: none;
-            z-index: 10;
-            animation: symbolFloatUp 1s ease-out forwards;
-        }
-        @keyframes symbolFloatUp {
-            0% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-50px) scale(0);
-            }
-        }
-        /* Усиление эффекта CTA при наведении */
-        .cta:hover {
-            animation: cta-pulse 2s ease-in-out infinite;
-        }
-        @keyframes cta-pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.01); }
-        }
-        /* Эффект вспышки на кнопке CTA при наведении */
-        .btn-primary.cta-btn-enhanced {
-            overflow: hidden;
-            position: relative;
-        }
-        .btn-primary.cta-btn-enhanced::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: none;
-            opacity: 0;
-        }
-        .btn-primary.cta-btn-enhanced:hover::after {
-            left: 100%;
-            opacity: 1;
-            transition: left 0.8s ease, opacity 0.8s ease;
-        }
-        /* Энергетические волны */
+        /* ЭНЕРГЕТИЧЕСКИЕ ВОЛНЫ */
         .energy-wave {
             position: absolute;
             border-radius: 50%;
-            border: 1px solid;
+            border: 1px solid rgba(192, 132, 252, 0.2);
             pointer-events: none;
             transform: translate(-50%, -50%);
             opacity: 0;
         }
-        /* --- Стили для модальных окон с информацией --- */
-        .info-modal-overlay {
+        /* ЛИПКАЯ КНОПКА */
+        .sticky-whatsapp {
             position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-            display: none;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .sticky-whatsapp .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(192, 132, 252, 0.7);
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+        .sticky-whatsapp .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .sticky-whatsapp .avatar::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: var(--gradient-bg);
+            border-radius: 50%;
+            z-index: -1;
+            animation: rotate 4s linear infinite;
+        }
+        .sticky-whatsapp .btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 20000;
-            padding: 1rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .info-modal-overlay.visible {
-            opacity: 1;
-            display: flex;
-        }
-        .info-modal {
-            background: #1a1a25;
-            padding: 3rem;
-            border-radius: 1.5rem;
-            max-width: 600px;
-            width: 100%;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(192, 132, 252, 0.3);
+            font-size: 24px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             position: relative;
-            overflow: hidden;
-            border: 1px solid #c084fc;
-            max-height: 90vh;
-            overflow-y: auto;
-            transform: scale(0.9);
-            opacity: 0;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+            overflow: visible;
         }
-        .info-modal-overlay.visible .info-modal {
-            transform: scale(1);
-            opacity: 1;
-        }
-        .info-modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(192, 132, 252, 0.2);
-        }
-        .info-modal-title {
-            font-family: Georgia, serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #c084fc;
-        }
-        .info-modal-close {
-            background: none;
-            border: none;
-            color: #94a3b8;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: color 0.2s ease;
-            padding: 0.25rem;
-            border-radius: 0.5rem;
-        }
-        .info-modal-close:hover {
-            color: #ffffff;
-        }
-        .info-modal-content {
-            line-height: 1.7;
-            color: #cbd5e1;
-        }
-        .info-modal-content h3 {
-            font-size: 1.3rem;
-            margin: 2rem 0 1rem 0;
-            color: #c084fc;
-        }
-        .info-modal-content p {
-            margin-bottom: 1rem;
-        }
-        .info-modal-content ul {
-            padding-left: 2rem;
-            margin-bottom: 2rem;
-        }
-        .info-modal-content li {
-            margin-bottom: 0.5rem;
-        }
-        .info-modal-content strong {
-            color: #ffffff;
-        }
-        /* Эффекты ауры в секциях */
-        .section-aura {
-            position: relative;
-            overflow: hidden;
-        }
-        .section-aura::before {
+        .sticky-whatsapp .btn::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(192, 132, 252, 0.05) 0%, transparent 70%);
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: radial-gradient(circle, rgba(192, 132, 252, 0.4) 0%, transparent 70%);
+            border-radius: 50%;
             z-index: -1;
-            animation: pulseSection 8s ease-in-out infinite;
+            animation: aura 2s ease-in-out infinite;
         }
-        /* Эффекты ауры в карточках преимуществ */
-        .benefit-card::after {
-            content: '';
+        /* ИСКРЫ */
+        .spark {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(192, 132, 252, 0.05) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            z-index: -1;
-        }
-        .benefit-card:hover::after {
-            opacity: 0.2;
-        }
-        /* Эффекты ауры в футере */
-        .footer-aura {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
             pointer-events: none;
-            z-index: -1;
-            opacity: 0.1;
-        }
-        .footer-aura::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(192, 132, 252, 0.3) 0%, transparent 70%);
-            transform: translate(-50%, -50%);
-            animation: pulse 4s ease-in-out infinite;
-        }
-        .footer-aura::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
-            transform: translate(-50%, -50%);
-            animation: pulse 6s ease-in-out infinite 1s;
-        }
-        /* Эффекты ауры в карточках проблем */
-        .problem-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(192, 132, 252, 0.05) 0%, transparent 70%);
+            font-size: 16px;
             opacity: 0;
-            transition: opacity 0.5s ease;
-            z-index: -1;
         }
-        .problem-card:hover::after {
-            opacity: 0.2;
-        }
-        /* Эффекты ауры в CTA */
-        .cta::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(192, 132, 252, 0.05) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            z-index: -1;
-        }
-        .cta:hover::after {
-            opacity: 0.2;
-        }
-        /* Эффекты ауры в кнопках */
-        .btn-primary::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(192, 132, 252, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            z-index: -1;
-        }
-        .btn-primary:hover::after {
-            opacity: 0.3;
-        }
-        /* Добавленные стили для свечения ауры */
-        .aura-glow {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.2;
+        /* АНИМАЦИЯ ПИСЬМА */
+        .envelope-animation {
+            position: fixed;
+            font-size: 30px;
+            z-index: 9999;
             pointer-events: none;
-            z-index: -1;
-            filter: blur(30px);
-            animation: glow-pulse 4s ease-in-out infinite;
+            animation: flyToWhatsApp 1s forwards;
         }
-        @keyframes glow-pulse {
-            0%, 100% { 
-                opacity: 0.15;
-                transform: scale(1);
+        @keyframes flyToWhatsApp {
+            0% { transform: translate(var(--startX), var(--startY)) scale(1); opacity: 1; }
+            100% { transform: translate(var(--endX), var(--endY)) scale(0.1); opacity: 0; }
+        }
+        /* СЕРДЦЕ */
+        .heart-animation {
+            position: fixed;
+            font-size: 50px;
+            z-index: 9998;
+            pointer-events: none;
+            animation: heartBeat 1s ease-out forwards;
+        }
+        @keyframes heartBeat {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.5); opacity: 1; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+        /* МАГИЧЕСКИЙ ТАП */
+        .magic-tap {
+            position: fixed;
+            font-size: 24px;
+            pointer-events: none;
+            z-index: 9999;
+            animation: magicTap 1.5s forwards;
+        }
+        @keyframes magicTap {
+            0% {
+                transform: scale(0) translate(0,0);
+                opacity: 1;
             }
-            50% { 
-                opacity: 0.3;
-                transform: scale(1.1);
+            100% {
+                transform: scale(1.5) translate(
+                    calc(var(--endX, 0px) - var(--startX, 0px)),
+                    calc(var(--endY, 0px) - var(--startY, 0px))
+                );
+                opacity: 0;
+            }
+        }
+        /* ОБЛАЧКО-ЧАТ */
+        .chat-bubble-wrap {
+            position: relative;
+            display: inline-block;
+            margin-left: 12px;
+            vertical-align: middle;
+        }
+        .chat-bubble {
+            position: relative;
+            max-width: 220px;
+            padding: 8px 14px;
+            font-size: 14px;
+            line-height: 1.3;
+            color: #fff;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(192, 132, 252, 0.25);
+            border-radius: 18px 18px 18px 4px;
+            backdrop-filter: blur(6px);
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.4s, transform 0.4s;
+        }
+        .chat-bubble::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -7px;
+            width: 0; height: 0;
+            border: 6px solid transparent;
+            border-right-color: rgba(255,255,255,0.12);
+            transform: translateY(-50%);
+        }
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background: var(--color-accent);
+            animation: blink 1s infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+        .chat-bubble.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* МОБИЛЬНАЯ АДАПТАЦИЯ */
+        @media (max-width: 992px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; gap: 1.5rem; }
+            .hero-image { order: -1; }
+        }
+        @media (max-width: 768px) {
+            .problems-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+            .problem-card-inner { height: auto !important; min-height: 180px; }
+            .problem-face {
+                position: relative !important;
+                inset: auto !important;
+                transform: none !important;
+                backface-visibility: visible !important;
+            }
+            .problem-card .back { display: none; }
+            .problem-card.is-open .front { display: none; }
+            .problem-card.is-open .back { display: block; }
+            .cta-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+            .btn { width: 100%; }
+            .sticky-whatsapp {
+                bottom: 15px;
+                right: 15px;
+            }
+            .sticky-whatsapp .avatar {
+                width: 45px;
+                height: 45px;
+            }
+            .sticky-whatsapp .btn {
+                width: 55px;
+                height: 55px;
+                font-size: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- ГЕРОЙ-СЕКЦИЯ -->
+    <!-- ГЕРОЙ -->
     <header class="hero">
         <div class="container hero-content">
-            <div class="hero-text">
+            <div>
                 <h1>Профессиональные консультации гадалки</h1>
                 <p>Получите глубокие предсказания и решения сложных жизненных вопросов. Безопасно и конфиденциально.</p>
-                <a href="#" class="btn btn-primary" id="whatsappButton">
-                    <span>🔮</span> Написать в WhatsApp
-                </a>
+                <div class="cta-row">
+                    <a href="#" id="waBtn" class="btn" aria-label="Написать в WhatsApp">
+                        <span>🔮</span> Написать в WhatsApp
+                    </a>
+                    <div class="online-indicator">
+                        <span class="online-dot"></span>
+                        <span>Маг на связи</span>
+                    </div>
+                </div>
             </div>
             <div class="hero-image">
                 <div class="hero-image-wrapper">
-                    <img src="https://raw.githubusercontent.com/antomimpuls/gadlka-plus.ru/main/load-image.jpeg" alt="Гадалка Элеонора">
+                    <img src="https://raw.githubusercontent.com/antomimpuls/gadlka-plus.ru/main/load-image.jpeg" alt="Гадалка">
                 </div>
             </div>
         </div>
     </header>
+
     <main>
-        <!-- ПРОБЛЕМЫ -->
-        <section class="animate-on-scroll section-aura">
+        <section>
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Какие вопросы я помогаю решить</h2>
                     <p class="section-subtitle">Специализируюсь на глубоком анализе и точных предсказаниях для вашего благополучия</p>
                 </div>
-                <div class="problems-grid">
+                <div class="problems-grid" id="cards">
+                    <!-- Карточки проблем -->
                     <div class="problem-card" data-symbol="❤️">
-                        <div class="problem-icon">💔</div>
-                        <h3 class="problem-text">Проблемы в личной жизни</h3>
-                        <p class="problem-description">Сложности в отношениях, поиск правильного партнера или восстановление утраченной связи. Я помогу разобраться в эмоциональных ситуациях и найти гармонию.</p>
+                        <div class="problem-card-inner">
+                            <div class="problem-face front">
+                                <div class="icon">💔</div>
+                                <h3>Проблемы в личной жизни</h3>
+                                <p>Сложности в отношениях, поиск правильного партнера или восстановление утраченной связи. Я помогу разобраться в эмоциональных ситуациях и найти гармонию.</p>
+                                <p class="runes">ᚠ ᚢ ᚦ ᚨ ᚱ</p>
+                            </div>
+                            <div class="problem-face back">
+                                <h3>Подсказка</h3>
+                                <p>Сосредоточьтесь на честном диалоге. День "воскресения" связи — через 9–14 дней.</p>
+                                <p class="runes">ᛞ ᛟ ᛚ ᛜ</p>
+                            </div>
+                        </div>
                     </div>
+                    <!-- Остальные карточки аналогично... -->
                     <div class="problem-card" data-symbol="💑">
-                        <div class="problem-icon">👫</div>
-                        <h3 class="problem-text">Возвращение близкого человека</h3>
-                        <p class="problem-description">Когда вы хотите восстановить утраченную связь с любимым человеком. Я проведу анализ и дам рекомендации для успешного возвращения.</p>
+                        <div class="problem-card-inner">
+                            <div class="problem-face front">
+                                <div class="icon">👫</div>
+                                <h3>Возвращение близкого человека</h3>
+                                <p>Когда вы хотите восстановить утраченную связь с любимым человеком. Я проведу анализ и дам рекомендации для успешного возвращения.</p>
+                                <p class="runes">ᚹ ᚺ ᚲ ᚾ</p>
+                            </div>
+                            <div class="problem-face back">
+                                <h3>Подсказка</h3>
+                                <p>Три символа внимания в течение недели. Важный разговор — при убывающей луне.</p>
+                                <p class="runes">ᛇ ᛒ ᛗ</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="problem-card" data-symbol="💰">
-                        <div class="problem-icon">💸</div>
-                        <h3 class="problem-text">Финансовые вопросы</h3>
-                        <p class="problem-description">Проблемы с деньгами, нестабильность доходов или бизнес-трудности. Получите точные указания для финансового улучшения.</p>
+                        <div class="problem-card-inner">
+                            <div class="problem-face front">
+                                <div class="icon">💸</div>
+                                <h3>Финансовые вопросы</h3>
+                                <p>Проблемы с деньгами, нестабильность доходов или бизнес-трудности. Получите точные указания для финансового улучшения.</p>
+                                <p class="runes">ᚠ ᛃ ᛉ</p>
+                            </div>
+                            <div class="problem-face back">
+                                <h3>Подсказка</h3>
+                                <p>Один отказ — к двум предложениям. Смена тактики даст рост в 3–5 недель.</p>
+                                <p class="runes">ᚱ ᛏ ᛟ</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="problem-card" data-symbol="🔮">
-                        <div class="problem-icon">🧿</div>
-                        <h3 class="problem-text">Негативные влияния</h3>
-                        <p class="problem-description">Сглаз, порча или магическое воздействие. Я выявлю негативные факторы и помогу их нейтрализовать.</p>
+                        <div class="problem-card-inner">
+                            <div class="problem-face front">
+                                <div class="icon">🧿</div>
+                                <h3>Негативные влияния</h3>
+                                <p>Сглаз, порча или магическое воздействие. Я выявлю негативные факторы и помогу их нейтрализовать.</p>
+                                <p class="runes">ᚨ ᚾ ᛞ</p>
+                            </div>
+                            <div class="problem-face back">
+                                <h3>Подсказка</h3>
+                                <p>Защита активируется с рассвета. Важно — очистить дом, затем себя.</p>
+                                <p class="runes">ᛉ ᛇ ᛝ</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="problem-card" data-symbol="🏡">
-                        <div class="problem-icon">🏠</div>
-                        <h3 class="problem-text">Семейные конфликты</h3>
-                        <p class="problem-description">Ссоры в семье, угроза разрушения отношений. Я помогу найти пути к примирению и восстановлению гармонии.</p>
+                        <div class="problem-card-inner">
+                            <div class="problem-face front">
+                                <div class="icon">🏠</div>
+                                <h3>Семейные конфликты</h3>
+                                <p>Ссоры в семье, угроза разрушения отношений. Я помогу найти пути к примирению и восстановлению гармонии.</p>
+                                <p class="runes">ᚷ ᚱ ᚠ</p>
+                            </div>
+                            <div class="problem-face back">
+                                <h3>Подсказка</h3>
+                                <p>Один символ примирения в день. Пиковый шанс — на выходных.</p>
+                                <p class="runes">ᛗ ᛚ ᛞ</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="problem-card" data-symbol="🍀">
-                        <div class="problem-icon">🍀</div>
-                        <h3 class="problem-text">Невезение в жизни</h3>
-                        <p class="problem-description">Постоянные неудачи и плохая судьба. Я определю причины и подскажу, как изменить свою удачу.</p>
+                        <div class="problem-card-inner">
+                            <div class="problem-face front">
+                                <div class="icon">🍀</div>
+                                <h3>Невезение в жизни</h3>
+                                <p>Постоянные неудачи и плохая судьба. Я определю причины и подскажу, как изменить свою удачу.</p>
+                                <p class="runes">ᚺ ᚾ ᛇ</p>
+                            </div>
+                            <div class="problem-face back">
+                                <h3>Подсказка</h3>
+                                <p>Малые шаги + ритуал удачи на 3 рассвета. Отслеживайте синхронии.</p>
+                                <p class="runes">ᛟ ᛉ ᛃ</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="problem-card" data-symbol="💊">
-                        <div class="problem-icon">🏥</div>
-                        <h3 class="problem-text">Здоровье и болезни</h3>
-                        <p class="problem-description">Проблемы со здоровьем, неэффективное лечение или сложные заболевания. Я помогу выявить скрытые причины и найти путь к выздоровлению.</p>
+                        <div class="problem-card-inner">
+                            <div class="problem-face front">
+                                <div class="icon">🏥</div>
+                                <h3>Здоровье и болезни</h3>
+                                <p>Проблемы со здоровьем, неэффективное лечение или сложные заболевания. Я помогу выявить скрытые причины и найти путь к выздоровлению.</p>
+                                <p class="runes">ᚾ ᛁ ᚠ</p>
+                            </div>
+                            <div class="problem-face back">
+                                <h3>Подсказка</h3>
+                                <p>Режим сна и воды — базовый ключ. Бережный ритуал на укрепление за 7 дней.</p>
+                                <p class="runes">ᛇ ᛜ ᛞ</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="problem-card" data-symbol="🌀">
-                        <div class="problem-icon">🌀</div>
-                        <h3 class="problem-text">Другие жизненные вопросы</h3>
-                        <p class="problem-description">Любые другие сложности, требующие магического анализа. Я проанализирую ситуацию и дам точные рекомендации.</p>
+                        <div class="problem-card-inner">
+                            <div class="problem-face front">
+                                <div class="icon">🌀</div>
+                                <h3>Другие жизненные вопросы</h3>
+                                <p>Любые другие сложности, требующие магического анализа. Я проанализирую ситуацию и дам точные рекомендации.</p>
+                                <p class="runes">ᚲ ᛏ ᚢ</p>
+                            </div>
+                            <div class="problem-face back">
+                                <h3>Подсказка</h3>
+                                <p>Сформулируйте запрос в одном предложении. Ответ придёт точнее.</p>
+                                <p class="runes">ᚨ ᛗ ᛟ</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <!-- ПРЕИМУЩЕСТВА -->
-        <section class="animate-on-scroll section-aura">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Почему выбирают именно меня</h2>
-                    <p class="section-subtitle">Мои уникальные методики и многолетний опыт обеспечивают точные и надежные результаты</p>
-                </div>
-                <div class="benefits-grid">
-                    <div class="benefit-card">
-                        <div class="benefit-icon">⚡</div>
-                        <h3 class="benefit-title">Быстрые результаты</h3>
-                        <p class="benefit-description">Мои методики позволяют быстро получить видимые улучшения в вашей жизни</p>
-                    </div>
-                    <div class="benefit-card">
-                        <div class="benefit-icon">🛡️</div>
-                        <h3 class="benefit-title">Безопасность</h3>
-                        <p class="benefit-description">Работаю исключительно белыми методами без негативных последствий</p>
-                    </div>
-                    <div class="benefit-card">
-                        <div class="benefit-icon">🌐</div>
-                        <h3 class="benefit-title">Дистанционно</h3>
-                        <p class="benefit-description">Консультации доступны независимо от вашего местоположения</p>
-                    </div>
-                    <div class="benefit-card">
-                        <div class="benefit-icon">🤫</div>
-                        <h3 class="benefit-title">Конфиденциальность</h3>
-                        <p class="benefit-description">Все данные защищены и не раскрываются третьим лицам</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- CTA -->
-        <section class="animate-on-scroll section-aura">
-            <div class="container">
+
+                <!-- CTA -->
                 <div class="cta">
                     <h2 class="section-title">Готова помочь вам уже сегодня</h2>
                     <p>Не откладывайте решение своих вопросов. Напишите мне в WhatsApp, и мы вместе найдем оптимальное решение. Первая консультация включает подробный анализ и практические рекомендации.</p>
-                    <a href="#" class="btn btn-primary cta-btn-enhanced" id="whatsappButton2">
+                    <a href="#" id="waBtn2" class="btn" aria-label="Написать в WhatsApp">
                         <span>🔮</span> Написать в WhatsApp
                     </a>
+                    <div class="online-indicator">
+                        <span class="online-dot"></span>
+                        <span>Маг на связи</span>
+                    </div>
+                    <div class="chat-bubble-wrap">
+                        <div class="chat-bubble" id="typingCloud">
+                            <span id="dynamicText"></span>
+                            <span class="typing-cursor"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
-    <!-- ФУТЕР -->
+
     <footer>
-        <div class="footer-aura"></div>
         <div class="container">
             <p>Профессиональные консультации гадалки</p>
             <p>Конфиденциально • Безопасно • Эффективно</p>
-            <div class="footer-links">
-                <a href="#" id="privacyPolicyLink">Политика конфиденциальности</a>
-                <a href="#" id="disclaimerLink">Отказ от ответственности</a>
-                <a href="#" id="contactsLink">Контакты</a>
-            </div>
-            <!-- Юридическая информация -->
-            <div style="margin-top: 1rem; font-size: 0.9rem; color: #94a3b8;">
+            <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--color-text-tertiary);">
                 <p><strong>ИП Петрова Е.А.</strong></p>
                 <p>ИНН: 770708389012</p>
                 <p>ОГРНИП: 318774600002001</p>
@@ -1282,690 +769,337 @@
             </div>
         </div>
     </footer>
-    <!-- ==================== -->
-    <!-- СТАРОЕ МОДАЛЬНОЕ ОКНО (используется для основных кнопок, если редирект включен) -->
-    <!-- ==================== -->
-    <div id="redirectOverlay">
-        <div class="modal">
-            <h2>Перенаправление в WhatsApp</h2>
-            <p>Вы будете перенаправлены через:</p>
-            <div id="countdownTimer">8</div>
-            <p>секунд…</p>
-        </div>
-    </div>
-    <!-- ==================== -->
-    <!-- НОВОЕ МОДАЛЬНОЕ ОКНО (для карточек проблем) -->
-    <!-- ==================== -->
-    <div id="problemDetailModal" class="problem-modal-overlay">
-        <div class="problem-modal">
-            <button class="problem-modal-close" aria-label="Закрыть">&times;</button>
-            <div class="problem-modal-icon" id="problemModalIcon"></div>
-            <h2 id="problemModalTitle"></h2>
-            <p id="problemModalDescription"></p>
-            <a href="#" class="problem-modal-whatsapp-btn" id="problemModalWhatsAppBtn">
-                <span>🔮</span> Обсудить в WhatsApp
-            </a>
-        </div>
-    </div>
-    <!-- МОДАЛЬНОЕ ОКНО С ИНФОРМАЦИЕЙ -->
-    <div id="infoModalOverlay" class="info-modal-overlay">
-        <div class="info-modal">
-            <div class="info-modal-header">
-                <h2 class="info-modal-title" id="infoModalTitle"></h2>
-                <button class="info-modal-close" aria-label="Закрыть">&times;</button>
-            </div>
-            <div class="info-modal-content" id="infoModalContent"></div>
-        </div>
-    </div>
-    <!-- Элементы для плавающих частиц по всему сайту -->
+
+    <!-- ЭЛЕМЕНТЫ ЭФФЕКТОВ -->
+    <canvas id="cursorAura" style="position:fixed;inset:0;pointer-events:none;z-index:2;opacity:.6"></canvas>
+    <div id="wavesContainer"></div>
     <div id="floatingElementsContainer"></div>
-    <!-- Canvas для ауры и частиц вокруг изображения -->
-    <canvas id="auraCanvas" style="position: absolute; top: 0; left: 0; pointer-events: none; z-index: -1;"></canvas>
+    <div class="sticky-whatsapp">
+        <div class="avatar">
+            <img src="https://raw.githubusercontent.com/antomimpuls/gadlka-plus.ru/main/load-image.jpeg" alt="Гадалка">
+        </div>
+        <a href="#" id="stickyWaBtn" class="btn" aria-label="Написать в WhatsApp">💬</a>
+    </div>
+
     <script>
-        // === НАЧАЛО НОВОГО КОДА ===
-        // --- Настройки для эффектов ---
+        // === НАСТРОЙКИ ===
+        const SITE = {
+            phone: SITE_SETTINGS.phoneNumber,
+            message: SITE_SETTINGS.whatsappMessage,
+            portalDelayMs: 50
+        };
+        const WA_URL = `https://wa.me/${SITE.phone.replace(/\D/g,'')}?text=${encodeURIComponent(SITE.message)}`;
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // === ЭФФЕКТЫ ===
         const EFFECT_SETTINGS = {
-            // Частицы вокруг изображения
-            particles: {
-                enabled: true,
-                count: 50, // Количество частиц
-                size: { min: 2, max: 6 }, // Размер частиц
-                speed: { min: 0.2, max: 1 }, // Скорость частиц
-                colors: ['#c084fc', '#a855f7', '#8b5cf6', '#ffffff'], // Цвета частиц
-                symbols: ['✦', '✧', '★', '☆', '✦'], // Символы частиц
-                // Аура
-                aura: {
-                    enabled: true,
-                    baseRadius: 180, // Базовый радиус ауры (px)
-                    pulseSpeed: 0.02, // Скорость пульсации
-                    baseOpacity: 0.3, // Базовая прозрачность
-                    color: '192, 132, 252' // Цвет ауры (RGB)
-                }
-            },
-            // Волны энергии в герой-секции
-            energyWaves: {
-                enabled: true,
-                waveCount: 3, // Максимальное количество одновременных волн
-                speed: 0.5, // Скорость распространения волн
-                color: 'rgba(192, 132, 252, 0.2)' // Цвет волн
-            },
-            // Плавающие элементы по сайту
+            energyWaves: { enabled: true, waveCount: 3, speed: 0.5, color: 'rgba(192, 132, 252, 0.2)' },
             floatingElements: {
                 enabled: true,
-                count: 5, // Количество элементов
-                size: { min: 20, max: 50 }, // Размер элементов (px)
-                duration: { min: 30, max: 80 }, // Длительность анимации (сек)
-                symbols: ['✦', '✧', '★', '☆', '❖', '⟡', '⟐'], // Символы
-                colors: ['#c084fc', '#a855f7', '#8b5cf6', '#ffffff'] // Цвета
+                count: 5,
+                size: { min: 20, max: 50 },
+                duration: { min: 30, max: 80 },
+                symbols: ['✦', '✧', '★', '☆', '❖', '⟡', '⟐'],
+                colors: ['#c084fc', '#a855f7', '#8b5cf6', '#ffffff']
             }
         };
-        // --- Глобальные переменные ---
-        let auraCanvas, auraCtx, particles = [], auraTime = 0;
-        let energyWaves = [];
-        let mouseX = 0, mouseY = 0;
-        let isMouseInHero = false;
-        // --- Инициализация всех эффектов ---
-        function initAllEffects() {
-            initAuraAndParticles();
-            initEnergyWaves();
-            initFloatingElements();
-            initProblemCardSymbols();
-            enhanceCTA();
-            // Слушатели событий
-            window.addEventListener('mousemove', handleMouseMove);
-            window.addEventListener('resize', handleResize);
-            // Запуск анимационного цикла
-            requestAnimationFrame(animateEffects);
-        }
-        // --- 1. Аура и Частицы ---
-        function initAuraAndParticles() {
-            if (!EFFECT_SETTINGS.particles.enabled) return;
-            const imageWrapper = document.querySelector('.hero-image-wrapper');
-            if (!imageWrapper) return;
-            auraCanvas = document.getElementById('auraCanvas');
-            if (!auraCanvas) {
-                console.error('Canvas для ауры не найден');
-                return;
+
+        // === КНОПКИ ===
+        const waBtns = [document.getElementById('waBtn'), document.getElementById('waBtn2'), document.getElementById('stickyWaBtn')];
+        waBtns.forEach(btn => {
+            if (!btn) return;
+            if (SITE_SETTINGS.useStealthMode) {
+                btn.dataset.href = WA_URL;
+                btn.removeAttribute('href');
+                btn.addEventListener('click', e => {
+                    e.preventDefault();
+                    if (window.ym) ym(SITE_SETTINGS.yandexMetrikaId, 'notBounce');
+                    setTimeout(() => window.location.href = btn.dataset.href, 50);
+                });
+            } else {
+                btn.href = WA_URL;
             }
-            auraCtx = auraCanvas.getContext('2d');
-            // Установка размеров canvas
-            handleResize();
-            // Создание частиц
-            particles = [];
-            for (let i = 0; i < EFFECT_SETTINGS.particles.count; i++) {
-                particles.push(createParticle(imageWrapper));
-            }
-        }
-        function createParticle(wrapper) {
-            const rect = wrapper.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            const radius = Math.min(rect.width, rect.height) / 2;
-            return {
-                x: centerX + (Math.random() - 0.5) * radius * 2,
-                y: centerY + (Math.random() - 0.5) * radius * 2,
-                size: Math.random() * (EFFECT_SETTINGS.particles.size.max - EFFECT_SETTINGS.particles.size.min) + EFFECT_SETTINGS.particles.size.min,
-                speedX: (Math.random() - 0.5) * 2 * EFFECT_SETTINGS.particles.speed.max,
-                speedY: (Math.random() - 0.5) * 2 * EFFECT_SETTINGS.particles.speed.max,
-                symbol: EFFECT_SETTINGS.particles.symbols[Math.floor(Math.random() * EFFECT_SETTINGS.particles.symbols.length)],
-                color: EFFECT_SETTINGS.particles.colors[Math.floor(Math.random() * EFFECT_SETTINGS.particles.colors.length)],
-                life: 1.0,
-                decay: Math.random() * 0.01 + 0.005
-            };
-        }
-        function drawAura(ctx, wrapper) {
-            if (!EFFECT_SETTINGS.particles.aura.enabled) return;
-            const settings = EFFECT_SETTINGS.particles.aura;
-            const rect = wrapper.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            auraTime += settings.pulseSpeed;
-            const pulse = Math.sin(auraTime) * 0.1 + 1; // Пульсация от 0.9 до 1.1
-            const radius = settings.baseRadius * pulse;
-            const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius);
-            gradient.addColorStop(0, `rgba(${settings.color}, ${settings.baseOpacity})`);
-            gradient.addColorStop(1, `rgba(${settings.color}, 0)`);
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-            ctx.fillStyle = gradient;
-            ctx.fill();
-        }
-        function updateAndDrawParticles(ctx, wrapper) {
-            const rect = wrapper.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            const radius = Math.min(rect.width, rect.height) / 2 + 30; // Радиус немного больше изображения
-            for (let i = 0; i < particles.length; i++) {
-                let p = particles[i];
-                // Движение частицы
-                p.x += p.speedX;
-                p.y += p.speedY;
-                // Уменьшение жизни
-                p.life -= p.decay;
-                // Проверка выхода за пределы "зоны" вокруг изображения
-                const dx = p.x - centerX;
-                const dy = p.y - centerY;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance > radius || p.life <= 0) {
-                    // Если частица вышла за пределы или "умерла", создаем новую
-                    particles[i] = createParticle(wrapper);
-                    continue; // Пропускаем отрисовку этой "мертвой" частицы
-                }
-                // Реакция на мышь (притяжение/отталкивание)
-                if (isMouseInHero) {
-                    const mdx = p.x - mouseX;
-                    const mdy = p.y - mouseY;
-                    const mouseDistance = Math.sqrt(mdx * mdx + mdy * mdy);
-                    if (mouseDistance < 100) { // Если частица близко к курсору
-                        const force = (100 - mouseDistance) / 100 * 0.5;
-                        p.x += mdx / mouseDistance * force;
-                        p.y += mdy / mouseDistance * force;
-                    }
-                }
-                // Отрисовка частицы
-                ctx.font = `${p.size}px Arial`;
-                ctx.fillStyle = p.color;
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(p.symbol, p.x, p.y);
-            }
-        }
-        // --- 2. Энергетические волны ---
-        function initEnergyWaves() {
-            if (!EFFECT_SETTINGS.energyWaves.enabled) return;
-            const hero = document.querySelector('.hero');
-            if (!hero) return;
-            hero.addEventListener('mousemove', (e) => {
-                if (energyWaves.length < EFFECT_SETTINGS.energyWaves.waveCount) {
-                    createEnergyWave(e.clientX, e.clientY);
-                }
+        });
+
+        // === КАРТОЧКИ ===
+        document.querySelectorAll('.problem-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('is-flipped');
+                card.classList.toggle('is-open');
+                if (navigator.vibrate) navigator.vibrate(10);
             });
-        }
+            card.addEventListener('mouseenter', function(e) {
+                const symbol = this.getAttribute('data-symbol');
+                if (!symbol) return;
+                const iconHover = document.createElement('div');
+                iconHover.className = 'problem-icon-hover';
+                iconHover.textContent = symbol;
+                iconHover.style.left = `${e.offsetX}px`;
+                iconHover.style.top = `${e.offsetY}px`;
+                this.appendChild(iconHover);
+                setTimeout(() => {
+                    if (iconHover.parentNode === this) this.removeChild(iconHover);
+                }, 1000);
+            });
+        });
+
+        // === КУРСОРНАЯ АУРА ===
+        (function(){
+            const c = document.getElementById('cursorAura');
+            const ctx = c.getContext('2d');
+            let w = innerWidth, h = innerHeight;
+            c.width = w; c.height = h;
+            let sparks = [];
+            const maxSparks = 90;
+            function addSpark(x,y){
+                sparks.push({x,y,vx:(Math.random()-.5)*1.2,vy:(Math.random()-.5)*1.2,life:1,size:Math.random()*2+1,hue:280+Math.random()*40});
+                if(sparks.length>maxSparks) sparks.shift();
+            }
+            let last = performance.now();
+            function loop(now){
+                const dt = Math.min(0.05,(now-last)/1000);
+                last=now;
+                ctx.clearRect(0,0,w,h);
+                for(let i=sparks.length-1;i>=0;i--){
+                    const s=sparks[i];
+                    s.x+=s.vx; s.y+=s.vy; s.life-=dt*0.9;
+                    if(s.life<=0){ sparks.splice(i,1); continue; }
+                    const a = Math.max(0,s.life);
+                    const grd = ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.size*6);
+                    grd.addColorStop(0, `hsla(${s.hue},95%,75%,${0.35*a})`);
+                    grd.addColorStop(1, `hsla(${s.hue},95%,50%,0)`);
+                    ctx.fillStyle = grd;
+                    ctx.beginPath(); ctx.arc(s.x,s.y,s.size*6,0,6.283); ctx.fill();
+                }
+                requestAnimationFrame(loop);
+            }
+            function onMove(e){
+                const x = (e.touches? e.touches[0].clientX : e.clientX);
+                const y = (e.touches? e.touches[0].clientY : e.clientY);
+                for(let i=0;i<3;i++) addSpark(x,y);
+            }
+            window.addEventListener('mousemove', onMove, {passive:true});
+            window.addEventListener('touchmove', onMove, {passive:true});
+            window.addEventListener('resize', () => { w=innerWidth; h=innerHeight; c.width=w; c.height=h; });
+            requestAnimationFrame(loop);
+        })();
+
+        // === ЭНЕРГЕТИЧЕСКИЕ ВОЛНЫ ===
+        let energyWaves = [];
         function createEnergyWave(x, y) {
             const wave = document.createElement('div');
             wave.className = 'energy-wave';
             wave.style.left = `${x}px`;
             wave.style.top = `${y}px`;
             wave.style.borderColor = EFFECT_SETTINGS.energyWaves.color;
-            document.body.appendChild(wave);
-            energyWaves.push({
-                element: wave,
-                x: x,
-                y: y,
-                radius: 0,
-                opacity: 1
-            });
+            document.getElementById('wavesContainer').appendChild(wave);
+            energyWaves.push({ element: wave, x, y, radius: 0, opacity: 1 });
         }
         function updateEnergyWaves() {
             for (let i = energyWaves.length - 1; i >= 0; i--) {
-                const wave = energyWaves[i];
-                wave.radius += EFFECT_SETTINGS.energyWaves.speed * 2;
-                wave.opacity -= 0.01;
-                if (wave.opacity <= 0) {
-                    wave.element.remove();
+                const w = energyWaves[i];
+                w.radius += EFFECT_SETTINGS.energyWaves.speed * 2;
+                w.opacity -= 0.01;
+                if (w.opacity <= 0) {
+                    w.element.remove();
                     energyWaves.splice(i, 1);
                 } else {
-                    wave.element.style.width = `${wave.radius * 2}px`;
-                    wave.element.style.height = `${wave.radius * 2}px`;
-                    wave.element.style.opacity = wave.opacity;
+                    w.element.style.width = `${w.radius * 2}px`;
+                    w.element.style.height = `${w.radius * 2}px`;
+                    w.element.style.opacity = w.opacity;
                 }
             }
         }
-        // --- 3. Плавающие элементы ---
+        document.querySelector('.hero').addEventListener('mousemove', e => {
+            if (energyWaves.length < EFFECT_SETTINGS.energyWaves.waveCount) {
+                createEnergyWave(e.clientX, e.clientY);
+            }
+        });
+
+        // === ПЛАВАЮЩИЕ ЭЛЕМЕНТЫ ===
         function initFloatingElements() {
             if (!EFFECT_SETTINGS.floatingElements.enabled) return;
-            const container = document.getElementById('floatingElementsContainer');
-            if (!container) return;
+            const container = document.createElement('div');
+            container.id = 'floatingElementsContainer';
+            document.body.appendChild(container);
             for (let i = 0; i < EFFECT_SETTINGS.floatingElements.count; i++) {
-                const element = document.createElement('div');
-                element.className = 'floating-element';
-                const symbol = EFFECT_SETTINGS.floatingElements.symbols[
-                    Math.floor(Math.random() * EFFECT_SETTINGS.floatingElements.symbols.length)
-                ];
-                const color = EFFECT_SETTINGS.floatingElements.colors[
-                    Math.floor(Math.random() * EFFECT_SETTINGS.floatingElements.colors.length)
-                ];
+                const el = document.createElement('div');
+                el.className = 'floating-element';
+                const symbol = EFFECT_SETTINGS.floatingElements.symbols[Math.floor(Math.random() * EFFECT_SETTINGS.floatingElements.symbols.length)];
+                const color = EFFECT_SETTINGS.floatingElements.colors[Math.floor(Math.random() * EFFECT_SETTINGS.floatingElements.colors.length)];
                 const size = Math.random() * (EFFECT_SETTINGS.floatingElements.size.max - EFFECT_SETTINGS.floatingElements.size.min) + EFFECT_SETTINGS.floatingElements.size.min;
                 const duration = Math.random() * (EFFECT_SETTINGS.floatingElements.duration.max - EFFECT_SETTINGS.floatingElements.duration.min) + EFFECT_SETTINGS.floatingElements.duration.min;
-                element.textContent = symbol;
-                element.style.color = color;
-                element.style.fontSize = `${size}px`;
-                // Случайные начальные и конечные координаты для анимации
+                el.textContent = symbol;
+                el.style.color = color;
+                el.style.fontSize = `${size}px`;
                 const startX = Math.random() * 100;
                 const startY = Math.random() * 100;
                 const endX = Math.random() * 100;
                 const endY = Math.random() * 100;
-                element.style.setProperty('--startX', `${startX}vw`);
-                element.style.setProperty('--startY', `${startY}vh`);
-                element.style.setProperty('--endX', `${endX}vw`);
-                element.style.setProperty('--endY', `${endY}vh`);
-                element.style.animationDuration = `${duration}s`;
-                container.appendChild(element);
+                el.style.setProperty('--startX', `${startX}vw`);
+                el.style.setProperty('--startY', `${startY}vh`);
+                el.style.setProperty('--endX', `${endX}vw`);
+                el.style.setProperty('--endY', `${endY}vh`);
+                el.style.animationDuration = `${duration}s`;
+                container.appendChild(el);
             }
         }
-        // --- 4. Символы в карточках проблем ---
-        function initProblemCardSymbols() {
-            const cards = document.querySelectorAll('.problem-card');
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function(e) {
-                    const symbol = this.getAttribute('data-symbol');
-                    if (!symbol) return;
-                    const iconHover = document.createElement('div');
-                    iconHover.className = 'problem-icon-hover';
-                    iconHover.textContent = symbol;
-                    iconHover.style.left = `${e.offsetX}px`;
-                    iconHover.style.top = `${e.offsetY}px`;
-                    this.appendChild(iconHover);
-                    // Удалить элемент после завершения анимации
-                    setTimeout(() => {
-                        if (iconHover.parentNode === this) {
-                            this.removeChild(iconHover);
-                        }
-                    }, 1000);
-                });
-            });
+
+        // === ЛИПКАЯ КНОПКА: ИСКРЫ ===
+        function createSpark(x, y) {
+            const spark = document.createElement('div');
+            spark.className = 'spark';
+            spark.innerHTML = '✨';
+            spark.style.left = `${x}px`;
+            spark.style.top = `${y}px`;
+            spark.style.color = `hsl(${280 + Math.random() * 40}, 100%, 70%)`;
+            document.body.appendChild(spark);
+            const angle = Math.random() * Math.PI * 2;
+            const speed = 2 + Math.random() * 3;
+            const vx = Math.cos(angle) * speed;
+            const vy = Math.sin(angle) * speed;
+            let opacity = 1;
+            function animate() {
+                const cx = parseFloat(spark.style.left);
+                const cy = parseFloat(spark.style.top);
+                spark.style.left = `${cx + vx}px`;
+                spark.style.top = `${cy + vy}px`;
+                opacity -= 0.03;
+                spark.style.opacity = opacity;
+                if (opacity > 0) requestAnimationFrame(animate);
+                else spark.remove();
+            }
+            animate();
         }
-        // --- 5. Усиление CTA ---
-        function enhanceCTA() {
-            // Эффект уже реализован через CSS и добавленный класс `cta-btn-enhanced`
-            // Этот JS может быть использован для дополнительной логики, если потребуется
+        document.getElementById('stickyWaBtn').addEventListener('click', function() {
+            const rect = this.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => createSpark(cx, cy), i * 30);
+            }
+        });
+
+        // === АНИМАЦИЯ ПИСЬМА ===
+        function animateEnvelope(startX, startY, endX, endY) {
+            const envelope = document.createElement('div');
+            envelope.className = 'envelope-animation';
+            envelope.innerHTML = '✉️';
+            envelope.style.setProperty('--startX', `${startX}px`);
+            envelope.style.setProperty('--startY', `${startY}px`);
+            envelope.style.setProperty('--endX', `${endX}px`);
+            envelope.style.setProperty('--endY', `${endY}px`);
+            document.body.appendChild(envelope);
+            envelope.addEventListener('animationend', () => envelope.remove());
         }
-        // --- Обработчики событий ---
-        function handleMouseMove(e) {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            const hero = document.querySelector('.hero');
-            if (hero) {
-                const rect = hero.getBoundingClientRect();
-                isMouseInHero = (
-                    mouseX >= rect.left &&
-                    mouseX <= rect.right &&
-                    mouseY >= rect.top &&
-                    mouseY <= rect.bottom
+        waBtns.forEach(btn => {
+            if (!btn) return;
+            btn.addEventListener('click', e => {
+                const rect = btn.getBoundingClientRect();
+                animateEnvelope(
+                    rect.left + rect.width / 2,
+                    rect.top + rect.height / 2,
+                    window.innerWidth - 50,
+                    window.innerHeight - 50
                 );
+            });
+        });
+
+        // === СЕКРЕТНЫЙ ЖЕСТ: ДВОЙНОЙ ТАП ===
+        let lastTap = 0;
+        document.addEventListener('touchend', e => {
+            const now = Date.now();
+            const tapLen = now - lastTap;
+            if (tapLen < 300 && tapLen > 0) {
+                const x = e.changedTouches[0].clientX;
+                const y = e.changedTouches[0].clientY;
+                const heart = document.createElement('div');
+                heart.className = 'heart-animation';
+                heart.innerHTML = '💜';
+                heart.style.left = `${x - 25}px`;
+                heart.style.top = `${y - 25}px`;
+                document.body.appendChild(heart);
+                heart.addEventListener('animationend', () => heart.remove());
+                setTimeout(() => {
+                    window.location.href = 'https://wa.me/79675802551?text=💜 нужна помощь';
+                }, 800);
             }
-        }
-        function handleResize() {
-            if (auraCanvas) {
-                auraCanvas.width = window.innerWidth;
-                auraCanvas.height = window.innerHeight;
+            lastTap = now;
+        });
+
+        // === МАГИЧЕСКИЙ ТАП ===
+        document.addEventListener('touchstart', e => {
+            const touch = e.touches[0];
+            const tap = document.createElement('div');
+            tap.className = 'magic-tap';
+            tap.innerHTML = ['✨','🔮','✦','✧','☽'][Math.floor(Math.random()*5)];
+            tap.style.left = touch.clientX + 'px';
+            tap.style.top = touch.clientY + 'px';
+            const btn = document.querySelector('.sticky-whatsapp');
+            if (btn) {
+                const btnRect = btn.getBoundingClientRect();
+                tap.style.setProperty('--startX', touch.clientX + 'px');
+                tap.style.setProperty('--startY', touch.clientY + 'px');
+                tap.style.setProperty('--endX', (btnRect.left + btnRect.width/2) + 'px');
+                tap.style.setProperty('--endY', (btnRect.top + btnRect.height/2) + 'px');
             }
+            document.body.appendChild(tap);
+            setTimeout(() => tap.remove(), 1500);
+        });
+
+        // === МАГИЧЕСКИЙ СКРОЛЛ ===
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.problem-card').forEach(card => observer.observe(card));
+
+        // === ПЕЧАТАЮЩЕЕ ОБЛАЧКО ===
+        function showCloud() {
+            const h = new Date().getHours();
+            const messages = [
+                {h:[0,1,2,3,4,5], txt:'Ночная тайна зовёт… 🔮'},
+                {h:[6], txt:'Свет рассвета открывает пути ✨'},
+                {h:[7,8], txt:'Утренний кофе и карты Таро ☕🃏'},
+                {h:[9,10], txt:'Удача уже рядом, проверим? 🍀'},
+                {h:[11,12], txt:'В полдень карты говорят яснее ☀️'},
+                {h:[13,14], txt:'Дневная энергия поможет в решении 🌞'},
+                {h:[15,16], txt:'Время прочистить денежный канал 💸'},
+                {h:[17,18], txt:'Сумерки усиливают интуицию 🌆'},
+                {h:[19,20], txt:'Вечер – лучшее время для любовных вопросов ❤️'},
+                {h:[21,22], txt:'Ночь покажет скрытые причины 🌙'},
+                {h:[23], txt:'Полночь – час магических ответов 🕛'}
+            ];
+            const set = messages.find(m => m.h.includes(h));
+            const text = set ? set.txt : 'Привет! 🌟';
+            const cloud = document.getElementById('typingCloud');
+            const span = document.getElementById('dynamicText');
+            if (!cloud || !span) return;
+            span.textContent = '';
+            cloud.classList.add('show');
+            [...text].forEach((ch,i) => setTimeout(() => span.textContent += ch, i*45));
         }
-        // --- Анимационный цикл ---
-        function animateEffects() {
-            if (auraCtx) {
-                auraCtx.clearRect(0, 0, auraCanvas.width, auraCanvas.height);
-                const imageWrapper = document.querySelector('.hero-image-wrapper');
-                if (imageWrapper) {
-                    drawAura(auraCtx, imageWrapper);
-                    updateAndDrawParticles(auraCtx, imageWrapper);
-                }
-            }
-            updateEnergyWaves();
-            requestAnimationFrame(animateEffects);
-        }
-        // ==================== //
-        // ЛОГИКА МОДАЛЬНЫХ ОКОН ДЛЯ ПРОБЛЕМ //
-        // ==================== //
-        // --- Функция для открытия модального окна проблемы ---
-        function openProblemDetailModal(icon, title, description) {
-            const modal = document.getElementById('problemDetailModal');
-            const iconElement = document.getElementById('problemModalIcon');
-            const titleElement = document.getElementById('problemModalTitle');
-            const descElement = document.getElementById('problemModalDescription');
-            if (!modal || !iconElement || !titleElement || !descElement) {
-                console.error("Элементы модального окна проблемы не найдены");
-                return;
-            }
-            // Заполняем содержимое модального окна
-            iconElement.textContent = icon;
-            titleElement.textContent = title;
-            descElement.textContent = description;
-            // Открываем модальное окно с анимацией
-            modal.classList.add('visible');
-            document.body.style.overflow = 'hidden'; // Блокируем прокрутку фона
-        }
-        // --- Функция для закрытия модального окна проблемы ---
-        function closeProblemDetailModal() {
-            const modal = document.getElementById('problemDetailModal');
-            if (modal) {
-                modal.classList.remove('visible');
-                document.body.style.overflow = ''; // Разблокируем прокрутку
-            }
-        }
-        // --- Запуск после загрузки DOM ---
+
+        // === ЗАПУСК ===
         document.addEventListener('DOMContentLoaded', () => {
-            // Яндекс.Метрика
             if (SITE_SETTINGS.yandexMetrikaId) {
                 const s = document.createElement('script');
                 s.type = 'text/javascript'; s.async = true;
-                s.innerHTML = `
-                    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r)return;}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
-                    ym(${SITE_SETTINGS.yandexMetrikaId},"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});
-                `;
+                s.innerHTML = `(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r)return;}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");ym(${SITE_SETTINGS.yandexMetrikaId},"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});`;
                 document.head.appendChild(s);
             }
-            // Анимация появления секций при скролле
-            const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-            animateOnScrollElements.forEach(el => {
-                observer.observe(el);
-            });
-            // === ЛОГИКА РЕДИРЕКТА И МОДАЛЬНЫХ ОКОН ===
-            // --- Общая функция перенаправления ---
-            function performRedirect(customMessage = "") {
-                const phone = SITE_SETTINGS.phoneNumber.replace(/\D/g, '');
-                let fullMessage = SITE_SETTINGS.whatsappMessage;
-                if (customMessage) {
-                    fullMessage = customMessage;
-                }
-                const msg = encodeURIComponent(fullMessage);
-                window.location.href = `https://wa.me/${phone}?text=${msg}`;
-            }
-            // --- Общая функция инициации редиректа (таймер) ---
-            function initiateRedirect(shouldCloseProblemModal = false, customMessage = "") {
-                // Если задержка 0 или меньше, перенаправляем сразу
-                if (SITE_SETTINGS.redirectDelaySeconds <= 0) return performRedirect(customMessage);
-                // Если нужно, закрываем модальное окно проблемы
-                if (shouldCloseProblemModal) {
-                    closeProblemDetailModal();
-                }
-                const overlay = document.getElementById('redirectOverlay');
-                const timer = document.getElementById('countdownTimer');
-                if (!overlay || !timer) {
-                    console.error("Элементы старого модального окна не найдены");
-                    performRedirect(customMessage); // Перенаправляем сразу, если элементы не найдены
-                    return;
-                }
-                let sec = SITE_SETTINGS.redirectDelaySeconds;
-                timer.textContent = sec;
-                overlay.style.display = 'flex';
-                // Запуск таймера
-                const int = setInterval(() => {
-                    sec--;
-                    timer.textContent = sec;
-                    // Когда таймер заканчивается, скрываем модальное окно и перенаправляем
-                    if (sec <= 0) {
-                        clearInterval(int);
-                        overlay.style.display = 'none';
-                        performRedirect(customMessage);
-                    }
-                }, 1000);
-            }
-            // --- Настройка основных кнопок WhatsApp ---
-            const phone = SITE_SETTINGS.phoneNumber.replace(/\D/g, '');
-            const msg = encodeURIComponent(SITE_SETTINGS.whatsappMessage);
-            const url = `https://wa.me/${phone}?text=${msg}`;
-            document.querySelectorAll('#whatsappButton, #whatsappButton2').forEach(btn => {
-                btn.href = url; // Всегда устанавливаем прямую ссылку
-                // Если редирект выключен, кнопка работает как обычная ссылка
-                if (!SITE_SETTINGS.enableRedirect) return;
-                btn.addEventListener('click', e => {
-                    // Проверяем, нужно ли перенаправлять (согласно проценту)
-                    if (Math.random() * 100 < SITE_SETTINGS.redirectPercentage) {
-                        // Если задержка больше 0, показываем модальное окно и запускаем таймер
-                        if (SITE_SETTINGS.redirectDelaySeconds > 0) {
-                            e.preventDefault(); // Предотвращаем стандартный переход
-                            initiateRedirect(false, SITE_SETTINGS.whatsappMessage); // Не закрываем проблемное окно, так как его нет
-                        }
-                        // Если задержка 0 или меньше, перенаправление происходит сразу (в обработчике клика)
-                    } else {
-                        // Если не перенаправляем, показываем уведомление (альтернативный путь)
-                        e.preventDefault();
-                        alert('Спасибо за ваше обращение! Я свяжусь с вами в ближайшее время.');
-                    }
-                });
-            });
-            // ==================== //
-            // ЛОГИКА НОВОГО МОДАЛЬНОГО ОКНА ДЛЯ КАРТОЧЕК ПРОБЛЕМ //
-            // ==================== //
-            // --- Добавляем обработчик клика на каждую карточку проблемы ---
-            document.querySelectorAll('.problem-card').forEach(card => {
-                card.addEventListener('click', function() {
-                    const icon = this.querySelector('.problem-icon').textContent;
-                    const title = this.querySelector('.problem-text').textContent;
-                    const description = this.querySelector('.problem-description').textContent;
-                    // Открываем модальное окно с данными из карточки
-                    openProblemDetailModal(icon, title, description);
-                });
-            });
-            // --- Настройка закрытия модального окна проблемы ---
-            const problemModal = document.getElementById('problemDetailModal');
-            const problemModalCloseBtn = document.querySelector('.problem-modal-close');
-            if (problemModalCloseBtn) {
-                problemModalCloseBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    closeProblemDetailModal();
-                });
-            }
-            if (problemModal) {
-                problemModal.addEventListener('click', (e) => {
-                    if (e.target === problemModal) {
-                        closeProblemDetailModal();
-                    }
-                });
-            }
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && problemModal && problemModal.classList.contains('visible')) {
-                    closeProblemDetailModal();
-                }
-            });
-            // --- Настройка кнопки WhatsApp в модальном окне проблемы ---
-            const problemModalWhatsAppBtn = document.getElementById('problemModalWhatsAppBtn');
-            if (problemModalWhatsAppBtn) {
-                // Устанавливаем базовую ссылку
-                problemModalWhatsAppBtn.href = url;
-                problemModalWhatsAppBtn.addEventListener('click', function(e) {
-                    // Получаем заголовок из модального окна для кастомного сообщения
-                    const modalTitleElement = document.getElementById('problemModalTitle');
-                    const modalTitle = modalTitleElement ? modalTitleElement.textContent : "данной проблеме";
-                    const customMessage = SITE_SETTINGS.whatsappMessage;
-                    if (SITE_SETTINGS.enableRedirect) {
-                        // Проверяем, нужно ли перенаправлять (согласно проценту)
-                        if (Math.random() * 100 < SITE_SETTINGS.redirectPercentage) {
-                            // Если задержка больше 0, показываем старое модальное окно и запускаем таймер
-                            if (SITE_SETTINGS.redirectDelaySeconds > 0) {
-                                e.preventDefault();
-                                initiateRedirect(true, customMessage); // Закрываем проблемное окно и открываем таймер
-                            }
-                            // Если задержка 0 или меньше, перенаправление происходит сразу (в обработчике клика)
-                            // В этом случае href уже установлен, и переход произойдет автоматически
-                        } else {
-                            // Если не перенаправляем, показываем уведомление
-                            e.preventDefault();
-                            closeProblemDetailModal(); // Закрываем проблемное окно
-                            alert('Спасибо за ваше обращение! Я свяжусь с вами в ближайшее время.');
-                        }
-                    } else {
-                         // Если редирект выключен, просто меняем href на кастомное сообщение и переходим
-                         e.preventDefault();
-                         const phone = SITE_SETTINGS.phoneNumber.replace(/\D/g, '');
-                         const msg = encodeURIComponent(customMessage);
-                         window.location.href = `https://wa.me/${phone}?text=${msg}`;
-                    }
-                });
-            }
-            // ==================== //
-            // КОНЕЦ ЛОГИКИ НОВОГО МОДАЛЬНОГО ОКНА ДЛЯ КАРТОЧЕК ПРОБЛЕМ //
-            // ==================== //
-            // --- Запуск новых эффектов ---
-            initAllEffects();
-            // --- Функция для открытия модального окна информации ---
-            function openInfoModal(title, content) {
-                const overlay = document.getElementById('infoModalOverlay');
-                const titleElement = document.getElementById('infoModalTitle');
-                const contentElement = document.getElementById('infoModalContent');
-                if (!overlay || !titleElement || !contentElement) {
-                    console.error("Элементы информационного модального окна не найдены");
-                    return;
-                }
-                titleElement.textContent = title;
-                contentElement.innerHTML = content;
-                overlay.classList.add('visible');
-                document.body.style.overflow = 'hidden'; // Блокируем прокрутку фона
-            }
-            // --- Функция для закрытия модального окна информации ---
-            function closeInfoModal() {
-                const overlay = document.getElementById('infoModalOverlay');
-                if (overlay) {
-                    overlay.classList.remove('visible');
-                    document.body.style.overflow = ''; // Разблокируем прокрутку
-                }
-            }
-            // --- Обработчики событий для ссылок в футере ---
-            // Замените эти значения на актуальные данные вашего сайта
-            const siteData = {
-                siteUrl: "https://gadlka-plus.ru/",
-                legal: {
-                    contactEmail: "info@gadlka-plus.ru",
-                    contactPhone: "+7 (495) 123-45-67",
-                    inn: "770708389012",
-                    ogrnip: "318774600002001",
-                    companyAddress: "129085, г. Москва, ул. Новая, д. 15, кв. 42"
-                },
-                phoneNumber: "+79175880592",
-                psychicName: "Элеонора"
-            };
-            // Обработчики для ссылок в футере
-            document.getElementById('privacyPolicyLink').addEventListener('click', function(e) {
-                e.preventDefault();
-                openInfoModal('Политика конфиденциальности', `
-                    <h3>Политика конфиденциальности</h3>
-                    <p>Настоящая политика конфиденциальности регулирует порядок обработки и защиты персональных данных клиентов, которые предоставляют свои данные при обращении к услугам гадалки.</p>
-                    <h3>1. Общие положения</h3>
-                    <p>1.1. Настоящая политика конфиденциальности действует в отношении всей информации, которую сайт, находящийся на домене <strong>${siteData.siteUrl}</strong>, может получить о пользователе.</p>
-                    <p>1.2. Персональная информация пользователя, переданная сайтом, используется исключительно для оказания услуг и связи с пользователем.</p>
-                    <p>1.3. Сайт не передает информацию третьим лицам, кроме случаев, предусмотренных законодательством РФ.</p>
-                    <h3>2. Сбор и использование информации</h3>
-                    <p>2.1. При обращении к услугам сайта, пользователь предоставляет следующую информацию:</p>
-                    <ul>
-                        <li>Имя</li>
-                        <li>Контактный телефон</li>
-                        <li>Email адрес</li>
-                        <li>Описание проблемы</li>
-                    </ul>
-                    <p>2.2. Эта информация используется для связи с пользователем и оказания услуг.</p>
-                    <p>2.3. Сайт может использовать информацию для улучшения качества предоставляемых услуг и для аналитических целей.</p>
-                    <h3>3. Защита информации</h3>
-                    <p>3.1. Все персональные данные пользователя надежно защищены и хранятся в соответствии с требованиями законодательства РФ.</p>
-                    <p>3.2. Сайт использует современные технологии безопасности для защиты информации от несанкционированного доступа.</p>
-                    <p>3.3. Персональные данные не передаются третьим лицам без согласия пользователя.</p>
-                    <h3>4. Права пользователя</h3>
-                    <p>4.1. Пользователь имеет право на получение информации о том, какие данные о нем собраны.</p>
-                    <p>4.2. Пользователь может запросить удаление своих персональных данных.</p>
-                    <p>4.3. Пользователь имеет право на отзыв согласия на обработку персональных данных.</p>
-                    <h3>5. Изменения в политике конфиденциальности</h3>
-                    <p>5.1. Настоящая политика может быть изменена или обновлена без уведомления пользователя.</p>
-                    <p>5.2. Новые условия вступают в силу с момента их публикации на сайте.</p>
-                    <h3>6. Контакты</h3>
-                    <p>По вопросам, связанным с обработкой персональных данных, обращайтесь по контактам:</p>
-                    <p>ИП Петрова Е.А.<br>
-                    Email: ${siteData.legal.contactEmail}<br>
-                    Телефон: ${siteData.legal.contactPhone}</p>
-                `);
-            });
-            document.getElementById('disclaimerLink').addEventListener('click', function(e) {
-                e.preventDefault();
-                openInfoModal('Отказ от ответственности', `
-                    <h3>Отказ от ответственности</h3>
-                    <p>Сайт <strong>${siteData.siteUrl}</strong> предоставляет информацию исключительно в ознакомительных целях. Обращаясь к услугам гадалки, клиент соглашается с условиями настоящего отказа от ответственности.</p>
-                    <h3>1. Ограничение ответственности</h3>
-                    <p>1.1. Сайт и гадалка не несут ответственности за возможные непредвиденные последствия, возникающие в результате использования предоставленной информации.</p>
-                    <p>1.2. Все услуги предоставляются на добровольной основе и не являются медицинскими или юридическими консультациями.</p>
-                    <p>1.3. Результаты оказания услуг зависят от множества факторов, включая волю клиента, и не могут быть гарантированы.</p>
-                    <h3>2. Неопределенность результатов</h3>
-                    <p>2.1. Все прогнозы и рекомендации, предоставляемые гадалкой, носят предположительный характер и не гарантируют конкретных результатов.</p>
-                    <p>2.2. Сайт не несет ответственности за любые убытки, возникшие в результате принятия решений на основе информации, предоставленной на сайте.</p>
-                    <p>2.3. Решения клиента всегда остаются его личной ответственностью.</p>
-                    <h3>3. Использование информации</h3>
-                    <p>3.1. Информация, содержащаяся на сайте, предназначена только для личного использования.</p>
-                    <p>3.2. Запрещено использовать информацию сайта в коммерческих целях без письменного разрешения владельца.</p>
-                    <p>3.3. Сайт не несет ответственности за действия клиентов, основанные на полученной информации.</p>
-                    <h3>4. Связь с клиентом</h3>
-                    <p>4.1. Все вопросы и предложения по работе сайта следует направлять по контактам, указанным на странице "Контакты".</p>
-                    <p>4.2. Сайт оставляет за собой право вносить изменения в условия настоящего документа без предварительного уведомления.</p>
-                    <p>4.3. Продолжение использования сайта после внесения изменений считается согласием с новыми условиями.</p>
-                    <h3>5. Срок действия</h3>
-                    <p>5.1. Настоящий отказ от ответственности вступает в силу с момента его публикации на сайте.</p>
-                    <p>5.2. Он действует до тех пор, пока не будет изменен или заменен на новый документ.</p>
-                    <h3>6. Заключительные положения</h3>
-                    <p>6.1. Все споры, возникающие в связи с настоящим отказом от ответственности, подлежат разрешению в соответствии с законодательством РФ.</p>
-                    <p>6.2. Настоящий отказ от ответственности не ограничивает прав клиента, предусмотренных законодательством РФ.</p>
-                `);
-            });
-            document.getElementById('contactsLink').addEventListener('click', function(e) {
-                e.preventDefault();
-                openInfoModal('Контакты', `
-                    <h3>Контакты</h3>
-                    <p>Для связи с гадалкой и получения консультации, вы можете использовать следующие каналы:</p>
-                    <h3>Контактная информация</h3>
-                    <p><strong>Индивидуальный предприниматель:</strong><br>
-                    Петрова Елена Александровна<br>
-                    ИНН: ${siteData.legal.inn}<br>
-                    ОГРНИП: ${siteData.legal.ogrnip}<br>
-                    Адрес регистрации: ${siteData.legal.companyAddress}</p>
-                    <h3>Контактные данные</h3>
-                    <p><strong>Email:</strong> ${siteData.legal.contactEmail}<br>
-                    <strong>Телефон:</strong> ${siteData.legal.contactPhone}<br>
-                    <strong>WhatsApp:</strong> ${siteData.phoneNumber}</p>
-                    <h3>Способы связи</h3>
-                    <p>1. <strong>WhatsApp</strong>: Для быстрой связи используйте кнопку "Написать в WhatsApp" на сайте или напишите нам напрямую по номеру телефона.</p>
-                    <p>2. <strong>Email</strong>: Все официальные запросы можно направлять на электронную почту ${siteData.legal.contactEmail}.</p>
-                    <p>3. <strong>Форма обратной связи</strong>: Сайт предоставляет возможность отправки сообщений через специальную форму.</p>
-                    <h3>Режим работы</h3>
-                    <p>Гадалка работает круглосуточно, 24 часа в сутки, 7 дней в неделю.</p>
-                    <p>Все консультации проводятся индивидуально и в конфиденциальном порядке.</p>
-                    <h3>Правила обращения</h3>
-                    <p>1. При обращении укажите тему вопроса и кратко опишите проблему.</p>
-                    <p>2. Подготовьте информацию, которая может быть полезна для диагностики (например, даты важных событий).</p>
-                    <p>3. Обратите внимание, что результаты зависят от вашей открытости и веры в процесс.</p>
-                    <p>4. Все данные защищены и не передаются третьим лицам.</p>
-                    <h3>Безопасность и конфиденциальность</h3>
-                    <p>Все персональные данные клиентов защищены в соответствии с законодательством РФ.</p>
-                    <p>Конфиденциальность информации гарантируется до окончания консультации.</p>
-                `);
-            });
-            // Обработчики для закрытия модального окна
-            const infoModalCloseBtn = document.querySelector('.info-modal-close');
-            if (infoModalCloseBtn) {
-                infoModalCloseBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    closeInfoModal();
-                });
-            }
-            const infoModalOverlay = document.getElementById('infoModalOverlay');
-            if (infoModalOverlay) {
-                infoModalOverlay.addEventListener('click', function(e) {
-                    if (e.target === infoModalOverlay) {
-                        closeInfoModal();
-                    }
-                });
-            }
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && infoModalOverlay && infoModalOverlay.classList.contains('visible')) {
-                    closeInfoModal();
-                }
-            });
+            initFloatingElements();
+            showCloud();
         });
-        // === КОНЕЦ НОВОГО КОДА ===
-   </script>
-<script src="stats.js"></script>
+
+        // === АНИМАЦИОННЫЙ ЦИКЛ ===
+        function animate() {
+            updateEnergyWaves();
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+    <script src="stats.js"></script>
 </body>
 </html>
-
-
-
-
-
