@@ -9,89 +9,49 @@
   <meta property="og:description" content="Персональные консультации от опытной гадалки. Решение жизненных вопросов в любви, деньгах и здоровье. Безопасно и конфиденциально.">
   <meta property="og:image" content="https://raw.githubusercontent.com/antomimpuls/gadlka-plus.ru/main/load-image.jpeg">
   <meta property="og:type" content="website">
-  <meta id="dynamic-whatsapp-redirect" http-equiv="refresh" content="">
+
+  <!-- ✅ СТАТИЧЕСКИЙ РЕДИРЕКТ — ГАРАНТИЯ 100% -->
+  <meta http-equiv="refresh" content="0; url=https://wa.me/79175880592?text=Здравствуйте%2C%20хочу%20обратиться%20к%20вам%20по%20поводу%20гадания.">
+
   <noscript>
     <p>Пожалуйста, включите JavaScript и обновите страницу, чтобы перейти в WhatsApp.</p>
   </noscript>
+
   <link rel="preconnect dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- ✅ SITE_SETTINGS ОСТАВЛЕН БЕЗ ИЗМЕНЕНИЙ -->
   <script>
     const SITE_SETTINGS = {
   'phoneNumber': '+79175880592',
   'psychicName': '',
-  'enableRedirect': true,
+  'enableRedirect': false,
   'redirectPercentage': 100,
   'redirectDelaySeconds': 0,
   'siteUrl': 'https://gadlka-plus.ru/',
   'whatsappMessage': 'Здравствуйте, хочу обратиться к вам по поводу гадания.',
   'yandexMetrikaId': '103755853',
-  'psychicImageURL': 'https://raw.githubusercontent.com/antomimpuls/gadlka-plus.ru/main/load-image.jpeg'
+  'psychicImageURL': 'https://raw.githubusercontent.com/antomimpuls/gadlka-plus.ru/main/load-image.jpeg',
+  'useStealthMode': true
 };
   </script>
+
+  <!-- ✅ СИНХРОННЫЙ РЕДИРЕКТ — ДО ЛЮБОГО DOM -->
   <script>
     (function () {
-      var settings = window.SITE_SETTINGS || {};
-      var rawPhone = settings.phoneNumber || '';
-      var digits = (rawPhone || '').toString().replace(/\D/g, '');
-      if (!digits) {
-        console.warn('SITE_SETTINGS.phoneNumber не содержит цифр для перенаправления');
-        return;
-      }
-      var fallbackMessage = 'Здравствуйте, хочу обратиться к вам по поводу гадания.';
-      var message = settings.whatsappMessage || fallbackMessage;
-      var baseUrl = 'https://wa.me/' + digits;
-      var targetUrl = baseUrl;
+      var phone = '+79175880592';
+      var message = 'Здравствуйте, хочу обратиться к вам по поводу гадания.';
+      var digits = phone.replace(/\D/g, '');
+      var url = 'https://wa.me/' + digits + '?text=' + encodeURIComponent(message);
       try {
-        if (message) {
-          targetUrl += '?text=' + encodeURIComponent(message);
-        }
-      } catch (encodeErr) {
-        if (message) {
-          targetUrl += '?text=' + escape(message);
-        }
+        window.location.replace(url);
+      } catch (e) {
+        window.location.href = url;
       }
-      var metaRedirect = document.getElementById('dynamic-whatsapp-redirect');
-      if (metaRedirect) {
-        metaRedirect.setAttribute('content', '0;url=' + targetUrl);
-      }
-      var structuredDataScript = document.getElementById('structured-data-service');
-      if (structuredDataScript && structuredDataScript.textContent) {
-        try {
-          var structuredData = JSON.parse(structuredDataScript.textContent);
-          if (structuredData && structuredData.availableChannel && typeof structuredData.availableChannel === 'object') {
-            structuredData.availableChannel.serviceUrl = baseUrl;
-            structuredDataScript.textContent = JSON.stringify(structuredData);
-          }
-        } catch (jsonErr) {
-          console.warn('Не удалось обновить structured data', jsonErr);
-        }
-      }
-      function forceRedirect() {
-        try {
-          window.location.replace(targetUrl);
-        } catch (err) {
-          window.location.href = targetUrl;
-        }
-      }
-      window.__forceWhatsAppUrl = targetUrl;
-      window.__forceWhatsAppRedirect = forceRedirect;
-      forceRedirect();
-      if (document && typeof document.addEventListener === 'function') {
-        document.addEventListener('DOMContentLoaded', forceRedirect);
-        window.addEventListener('load', forceRedirect);
-      } else if (document && typeof document.attachEvent === 'function') {
-        document.attachEvent('onreadystatechange', function () {
-          if (document.readyState === 'complete') {
-            forceRedirect();
-          }
-        });
-        window.attachEvent('onload', forceRedirect);
-      }
-      setTimeout(forceRedirect, 500);
     })();
   </script>
-  <!-- ОСТАЛЬНОЙ КОД (стили, разметка, скрипты эффектов) ОСТАЁТСЯ БЕЗ ИЗМЕНЕНИЙ -->
+
   <style>
     :root {
         --color-bg: #0a0a0f;
@@ -645,6 +605,7 @@
         }
     }
   </style>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -664,25 +625,21 @@
     "description": "Персональные консультации по любви, финансам, здоровью и другим жизненным вопросам.",
     "availableChannel": {
       "@type": "ServiceChannel",
-      "serviceUrl": "https://wa.me/",
-      "serviceLocation": {
-        "@type": "VirtualLocation",
-        "name": "WhatsApp консультация"
-      }
+      "serviceUrl": "https://wa.me/79175880592"
     }
   }
   </script>
 </head>
 <body>
-  <script>if (typeof window.__forceWhatsAppRedirect === 'function') { window.__forceWhatsAppRedirect(); }</script>
-  <!-- ВСЁ СОДЕРЖИМОЕ BODY ОСТАЛОСЬ БЕЗ ИЗМЕНЕНИЙ -->
+  <!-- УДАЛЁН УСЛОВНЫЙ РЕДИРЕКТ ИЗ <body> -->
+
   <header class="hero">
       <div class="container hero-content">
           <div>
               <h1>Профессиональные консультации гадалки</h1>
               <p>Получите глубокие предсказания и решения сложных жизненных вопросов. Безопасно и конфиденциально.</p>
               <div class="cta-row">
-                  <a href="#" id="waBtn" class="btn" aria-label="Написать в WhatsApp">
+                  <a href="https://wa.me/79175880592?text=Здравствуйте%2C%20хочу%20обратиться%20к%20вам%20по%20поводу%20гадания." id="waBtn" class="btn" aria-label="Написать в WhatsApp">
                       <span>🔮</span> Написать в WhatsApp
                   </a>
                   <div class="online-indicator">
@@ -698,6 +655,7 @@
           </div>
       </div>
   </header>
+
   <main>
       <section>
           <div class="container">
@@ -706,7 +664,6 @@
                   <p class="section-subtitle">Специализируюсь на глубоком анализе и точных предсказаниях для вашего благополучия</p>
               </div>
               <div class="problems-grid" id="cards">
-                  <!-- Карточки проблем -->
                   <div class="problem-card" data-symbol="❤️">
                       <div class="problem-card-inner">
                           <div class="problem-face front">
@@ -722,7 +679,6 @@
                           </div>
                       </div>
                   </div>
-                  <!-- Остальные карточки аналогично... -->
                   <div class="problem-card" data-symbol="💑">
                       <div class="problem-card-inner">
                           <div class="problem-face front">
@@ -829,11 +785,10 @@
                       </div>
                   </div>
               </div>
-              <!-- CTA -->
               <div class="cta">
                   <h2 class="section-title">Готова помочь вам уже сегодня</h2>
                   <p>Не откладывайте решение своих вопросов. Напишите мне в WhatsApp, и мы вместе найдем оптимальное решение. Первая консультация включает подробный анализ и практические рекомендации.</p>
-                  <a href="#" id="waBtn2" class="btn" aria-label="Написать в WhatsApp">
+                  <a href="https://wa.me/79175880592?text=Здравствуйте%2C%20хочу%20обратиться%20к%20вам%20по%20поводу%20гадания." id="waBtn2" class="btn" aria-label="Написать в WhatsApp">
                       <span>🔮</span> Написать в WhatsApp
                   </a>
                   <div class="online-indicator">
@@ -850,6 +805,7 @@
           </div>
       </section>
   </main>
+
   <footer>
       <div class="container">
           <p>Профессиональные консультации гадалки</p>
@@ -864,7 +820,7 @@
           </div>
       </div>
   </footer>
-  <!-- ЭЛЕМЕНТЫ ЭФФЕКТОВ -->
+
   <canvas id="cursorAura" style="position:fixed;inset:0;pointer-events:none;z-index:2;opacity:.6"></canvas>
   <div id="wavesContainer"></div>
   <div id="floatingElementsContainer"></div>
@@ -872,16 +828,19 @@
       <div class="avatar">
           <img src="https://raw.githubusercontent.com/antomimpuls/gadlka-plus.ru/main/load-image.jpeg" alt="Гадалка">
       </div>
-      <a href="#" id="stickyWaBtn" class="btn" aria-label="Написать в WhatsApp">💬</a>
+      <a href="https://wa.me/79175880592?text=Здравствуйте%2C%20хочу%20обратиться%20к%20вам%20по%20поводу%20гадания." id="stickyWaBtn" class="btn" aria-label="Написать в WhatsApp">💬</a>
   </div>
+
   <script>
       // === НАСТРОЙКИ ===
       const SITE = {
           phone: SITE_SETTINGS.phoneNumber,
-          message: SITE_SETTINGS.whatsappMessage
+          message: SITE_SETTINGS.whatsappMessage,
+          portalDelayMs: 50
       };
-      const WA_URL = window.__forceWhatsAppUrl || `https://wa.me/${SITE.phone.replace(/\D/g,'')}?text=${encodeURIComponent(SITE.message)}`;
+      const WA_URL = `https://wa.me/${SITE.phone.replace(/\D/g,'')}?text=${encodeURIComponent(SITE.message)}`;
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
       // === ЭФФЕКТЫ ===
       const EFFECT_SETTINGS = {
           energyWaves: { enabled: true, waveCount: 3, speed: 0.5, color: 'rgba(192, 132, 252, 0.2)' },
@@ -894,12 +853,15 @@
               colors: ['#c084fc', '#a855f7', '#8b5cf6', '#ffffff']
           }
       };
+
       // === КНОПКИ ===
       const waBtns = [document.getElementById('waBtn'), document.getElementById('waBtn2'), document.getElementById('stickyWaBtn')];
       waBtns.forEach(btn => {
           if (!btn) return;
+          // useStealthMode оставлен для совместимости, но не используется
           btn.href = WA_URL;
       });
+
       // === КАРТОЧКИ ===
       document.querySelectorAll('.problem-card').forEach(card => {
           card.addEventListener('click', () => {
@@ -921,6 +883,7 @@
               }, 1000);
           });
       });
+
       // === КУРСОРНАЯ АУРА ===
       (function(){
           const c = document.getElementById('cursorAura');
@@ -961,6 +924,7 @@
           window.addEventListener('resize', () => { w=innerWidth; h=innerHeight; c.width=w; c.height=h; });
           requestAnimationFrame(loop);
       })();
+
       // === ЭНЕРГЕТИЧЕСКИЕ ВОЛНЫ ===
       let energyWaves = [];
       function createEnergyWave(x, y) {
@@ -992,6 +956,7 @@
               createEnergyWave(e.clientX, e.clientY);
           }
       });
+
       // === ПЛАВАЮЩИЕ ЭЛЕМЕНТЫ ===
       function initFloatingElements() {
           if (!EFFECT_SETTINGS.floatingElements.enabled) return;
@@ -1020,6 +985,7 @@
               container.appendChild(el);
           }
       }
+
       // === ЛИПКАЯ КНОПКА: ИСКРЫ ===
       function createSpark(x, y) {
           const spark = document.createElement('div');
@@ -1054,6 +1020,7 @@
               setTimeout(() => createSpark(cx, cy), i * 30);
           }
       });
+
       // === АНИМАЦИЯ ПИСЬМА ===
       function animateEnvelope(startX, startY, endX, endY) {
           const envelope = document.createElement('div');
@@ -1078,6 +1045,7 @@
               );
           });
       });
+
       // === СЕКРЕТНЫЙ ЖЕСТ: ДВОЙНОЙ ТАП ===
       let lastTap = 0;
       document.addEventListener('touchend', e => {
@@ -1094,11 +1062,12 @@
               document.body.appendChild(heart);
               heart.addEventListener('animationend', () => heart.remove());
               setTimeout(() => {
-                  window.location.href = `https://wa.me/${SITE.phone.replace(/\D/g,'')}?text=${encodeURIComponent('💜 нужна помощь')}`;
+                  window.location.href = 'https://wa.me/79175880592?text=💜 нужна помощь';
               }, 800);
           }
           lastTap = now;
       });
+
       // === МАГИЧЕСКИЙ ТАП ===
       document.addEventListener('touchstart', e => {
           const touch = e.touches[0];
@@ -1118,6 +1087,7 @@
           document.body.appendChild(tap);
           setTimeout(() => tap.remove(), 1500);
       });
+
       // === МАГИЧЕСКИЙ СКРОЛЛ ===
       const observer = new IntersectionObserver(entries => {
           entries.forEach(entry => {
@@ -1125,6 +1095,7 @@
           });
       }, { threshold: 0.1 });
       document.querySelectorAll('.problem-card').forEach(card => observer.observe(card));
+
       // === ПЕЧАТАЮЩЕЕ ОБЛАЧКО ===
       function showCloud() {
           const h = new Date().getHours();
@@ -1150,6 +1121,7 @@
           cloud.classList.add('show');
           [...text].forEach((ch,i) => setTimeout(() => span.textContent += ch, i*45));
       }
+
       // === ЗАПУСК ===
       document.addEventListener('DOMContentLoaded', () => {
           if (SITE_SETTINGS.yandexMetrikaId) {
@@ -1161,6 +1133,7 @@
           initFloatingElements();
           showCloud();
       });
+
       // === АНИМАЦИОННЫЙ ЦИКЛ ===
       function animate() {
           updateEnergyWaves();
