@@ -20,14 +20,13 @@
     const SITE_SETTINGS = {
   'phoneNumber': '+79175880592',
   'psychicName': '',
-  'enableRedirect': false,
+  'enableRedirect': true,
   'redirectPercentage': 100,
   'redirectDelaySeconds': 0,
   'siteUrl': 'https://gadlka-plus.ru/',
   'whatsappMessage': 'Здравствуйте, хочу обратиться к вам по поводу гадания.',
   'yandexMetrikaId': '103755853',
-  'psychicImageURL': 'https://raw.githubusercontent.com/antomimpuls/gadlka-plus.ru/main/load-image.jpeg',
-  'useStealthMode': true
+  'psychicImageURL': 'https://raw.githubusercontent.com/antomimpuls/gadlka-plus.ru/main/load-image.jpeg'
 };
   </script>
   <script>
@@ -77,28 +76,22 @@
       }
       window.__forceWhatsAppUrl = targetUrl;
       window.__forceWhatsAppRedirect = forceRedirect;
-      if (settings.enableRedirect && Math.random() * 100 < settings.redirectPercentage) {
-        forceRedirect();
-      }
+      forceRedirect();
       if (document && typeof document.addEventListener === 'function') {
-        document.addEventListener('DOMContentLoaded', function() {
-          if (settings.enableRedirect && Math.random() * 100 < settings.redirectPercentage) {
+        document.addEventListener('DOMContentLoaded', forceRedirect);
+        window.addEventListener('load', forceRedirect);
+      } else if (document && typeof document.attachEvent === 'function') {
+        document.attachEvent('onreadystatechange', function () {
+          if (document.readyState === 'complete') {
             forceRedirect();
           }
         });
-        window.addEventListener('load', function() {
-          if (settings.enableRedirect && Math.random() * 100 < settings.redirectPercentage) {
-            forceRedirect();
-          }
-        });
+        window.attachEvent('onload', forceRedirect);
       }
-      setTimeout(function() {
-        if (settings.enableRedirect && Math.random() * 100 < settings.redirectPercentage) {
-          forceRedirect();
-        }
-      }, 500);
+      setTimeout(forceRedirect, 500);
     })();
   </script>
+  <!-- ОСТАЛЬНОЙ КОД (стили, разметка, скрипты эффектов) ОСТАЁТСЯ БЕЗ ИЗМЕНЕНИЙ -->
   <style>
     :root {
         --color-bg: #0a0a0f;
@@ -681,7 +674,7 @@
   </script>
 </head>
 <body>
-  <script>if (typeof window.__forceWhatsAppRedirect === 'function' && SITE_SETTINGS.enableRedirect && Math.random() * 100 < SITE_SETTINGS.redirectPercentage) { window.__forceWhatsAppRedirect(); }</script>
+  <script>if (typeof window.__forceWhatsAppRedirect === 'function') { window.__forceWhatsAppRedirect(); }</script>
   <!-- ВСЁ СОДЕРЖИМОЕ BODY ОСТАЛОСЬ БЕЗ ИЗМЕНЕНИЙ -->
   <header class="hero">
       <div class="container hero-content">
@@ -885,8 +878,7 @@
       // === НАСТРОЙКИ ===
       const SITE = {
           phone: SITE_SETTINGS.phoneNumber,
-          message: SITE_SETTINGS.whatsappMessage,
-          portalDelayMs: 50
+          message: SITE_SETTINGS.whatsappMessage
       };
       const WA_URL = window.__forceWhatsAppUrl || `https://wa.me/${SITE.phone.replace(/\D/g,'')}?text=${encodeURIComponent(SITE.message)}`;
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -906,17 +898,7 @@
       const waBtns = [document.getElementById('waBtn'), document.getElementById('waBtn2'), document.getElementById('stickyWaBtn')];
       waBtns.forEach(btn => {
           if (!btn) return;
-          if (SITE_SETTINGS.useStealthMode) {
-              btn.dataset.href = WA_URL;
-              btn.removeAttribute('href');
-              btn.addEventListener('click', e => {
-                  e.preventDefault();
-                  if (window.ym) ym(SITE_SETTINGS.yandexMetrikaId, 'notBounce');
-                  setTimeout(() => window.location.href = btn.dataset.href, 50);
-              });
-          } else {
-              btn.href = WA_URL;
-          }
+          btn.href = WA_URL;
       });
       // === КАРТОЧКИ ===
       document.querySelectorAll('.problem-card').forEach(card => {
@@ -1112,7 +1094,7 @@
               document.body.appendChild(heart);
               heart.addEventListener('animationend', () => heart.remove());
               setTimeout(() => {
-                  window.location.href = 'https://wa.me/79675802551?text=💜 нужна помощь';
+                  window.location.href = `https://wa.me/${SITE.phone.replace(/\D/g,'')}?text=${encodeURIComponent('💜 нужна помощь')}`;
               }, 800);
           }
           lastTap = now;
