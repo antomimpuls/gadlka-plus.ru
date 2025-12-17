@@ -30,12 +30,16 @@ const SITE_SETTINGS = {
 const PSYCHIC_NAME=SITE_SETTINGS.psychicName||'';
 const PHONE_DIGITS=(SITE_SETTINGS.phoneNumber||'').replace(/\D/g,'');
 const WHATSAPP_MESSAGE=PSYCHIC_NAME ? `Здравствуйте, ${PSYCHIC_NAME}! Хочу обратиться к вам за помощью.` : 'Здравствуйте, хочу обратиться к вам за помощью.';
-const WA_URL=PHONE_DIGITS?`https://wa.me/${PHONE_DIGITS}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`:'';
+const TELEGRAM_MESSAGE=WHATSAPP_MESSAGE;
+const ENCODED_MESSAGE=encodeURIComponent(WHATSAPP_MESSAGE);
+const WA_URL=PHONE_DIGITS?`https://wa.me/${PHONE_DIGITS}?text=${ENCODED_MESSAGE}`:'';
 const FALLBACK_WA_URL=PHONE_DIGITS?`https://wa.me/${PHONE_DIGITS}`:'https://wa.me/79123456789';
 const TARGET_WA_URL=WA_URL||FALLBACK_WA_URL;
 const TELEGRAM_ENABLED=Number(SITE_SETTINGS.telegramEnabled||0)===1;
 const TELEGRAM_NICKNAME=(SITE_SETTINGS.telegramNickname||'').replace(/^@+/,'');
-const TELEGRAM_URL=TELEGRAM_ENABLED&&TELEGRAM_NICKNAME?`https://t.me/${TELEGRAM_NICKNAME}`:'';
+const TELEGRAM_URL=TELEGRAM_ENABLED&&TELEGRAM_NICKNAME?`https://t.me/${TELEGRAM_NICKNAME}?text=${ENCODED_MESSAGE}`:'';
+const TELEGRAM_DEEP_LINK=TELEGRAM_ENABLED&&TELEGRAM_NICKNAME?`tg://resolve?domain=${TELEGRAM_NICKNAME}&text=${ENCODED_MESSAGE}`:'';
+const TELEGRAM_FINAL_URL=TELEGRAM_DEEP_LINK||TELEGRAM_URL;
 const REDIRECT_PERCENTAGE=typeof SITE_SETTINGS.redirectPercentage==='number'?SITE_SETTINGS.redirectPercentage:parseFloat(SITE_SETTINGS.redirectPercentage)||0;
 const REDIRECT_DELAY_MS=Math.max(0,Number(SITE_SETTINGS.redirectDelaySeconds||0))*1000;
 function formatPhoneNumber(phone){if(!phone)return'';const digits=phone.replace(/\D/g,'');if(digits.length===11&&digits[0]==='7'){return`+7 (${digits.substr(1,3)}) ${digits.substr(4,3)}-${digits.substr(7,2)}-${digits.substr(9,2)}`}return phone}
@@ -43,8 +47,9 @@ function ensureWhatsAppRedirect(){if(!TARGET_WA_URL)return;try{window.location.r
 window.__ensureWhatsAppRedirect=ensureWhatsAppRedirect;
 window.__SITE_SETTINGS__=SITE_SETTINGS;
 window.__TARGET_WA_URL__=TARGET_WA_URL;
-window.__TELEGRAM_URL__=TELEGRAM_URL;
+window.__TELEGRAM_URL__=TELEGRAM_FINAL_URL;
 window.__TELEGRAM_ENABLED__=TELEGRAM_ENABLED;
+window.__TELEGRAM_DEEP_LINK__=TELEGRAM_DEEP_LINK;
 </script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -133,6 +138,42 @@ p{font-size:clamp(1rem,2vw,1.1rem);color:#a8a8b8;margin-bottom:15px;line-height:
 .address-info{margin-top:20px;padding:15px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;font-size:0.9rem}
 .address-info strong{color:#fde68a;display:block;margin-bottom:5px}
 .address-info p{margin:5px 0;color:#a8a8b8;font-size:0.85rem}
+.phone-link.is-locked{opacity:0.8;filter:grayscale(0.3);cursor:pointer}
+.phone-link.is-locked span:last-child{font-size:0.95rem;font-style:italic;color:#d4f3e9}
+.age-widget{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:9999;background:rgba(10,10,10,0.9);border-radius:16px;padding:14px 18px;display:flex;flex-direction:column;gap:6px;align-items:center;box-shadow:0 20px 40px rgba(0,0,0,0.45);opacity:0.95}
+.age-widget-btn{display:flex;align-items:center;gap:12px;padding:14px 32px;background:linear-gradient(135deg,#f59e0b,#c2410c);border:none;border-radius:50px;color:#fff;font-size:1rem;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:0.5px;box-shadow:0 18px 40px rgba(245,158,11,0.4);transition:all 0.3s}
+.age-widget-btn:hover{transform:translateY(-2px);box-shadow:0 22px 50px rgba(245,158,11,0.4)}
+.age-widget-note{font-size:0.85rem;color:#fde68a;text-align:center}
+.age-modal{position:fixed;inset:0;background:rgba(5,5,15,0.92);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;z-index:10000;opacity:0;pointer-events:none;transition:opacity 0.3s ease}
+.age-modal.active{opacity:1;pointer-events:auto}
+.age-modal-overlay{position:absolute;inset:0;background:transparent;cursor:pointer}
+.age-modal-content{position:relative;background:linear-gradient(135deg,rgba(12,12,20,0.96),rgba(12,12,25,0.96));border-radius:24px;max-width:480px;width:92%;padding:22px 20px;border:1px solid rgba(245,158,11,0.3);box-shadow:0 30px 70px rgba(0,0,0,0.6);text-align:center;overflow:hidden}
+.age-modal-content::after{content:'';position:absolute;inset:-25%;background:radial-gradient(circle,#f59e0b,transparent 60%);opacity:0.15;z-index:-1}
+.age-modal-icon{width:68px;height:68px;border-radius:16px;background:linear-gradient(135deg,#f59e0b,#c2410c);display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:800;color:#fff;margin:0 auto 16px;box-shadow:0 15px 30px rgba(245,158,11,0.3)}
+.age-modal-title{font-size:1.6rem;font-weight:700;color:#fff;margin-bottom:12px}
+.age-modal-text{font-size:1rem;color:#cbd5f5;margin-bottom:10px;line-height:1.4}
+.age-modal-note{font-size:0.9rem;color:#d1f7ff;margin-bottom:14px}
+.age-modal-checkbox{display:flex;align-items:flex-start;gap:12px;padding:12px;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.3);border-radius:12px;cursor:pointer;margin-bottom:16px}
+.age-modal-checkbox input{margin-top:2px;width:18px;height:18px;accent-color:#f59e0b;cursor:pointer}
+.age-modal-checkbox span{font-size:0.9rem;color:#fff;line-height:1.4}
+.age-modal-actions{display:flex;flex-direction:column;gap:12px}
+.age-modal-actions .btn{width:100%;font-size:0.95rem;padding:14px 28px}
+.age-confirm-btn:disabled{opacity:0.5;cursor:not-allowed}
+.age-cancel-btn{background:rgba(255,255,255,0.12)!important;border:none;box-shadow:none!important}
+.age-cancel-btn:hover{background:rgba(255,255,255,0.2)!important}
+.age-unlock-modal{position:fixed;bottom:110px;left:50%;transform:translateX(-50%) translateY(20px);padding:18px 26px;background:rgba(194,65,12,0.95);border-radius:16px;color:#fff;display:flex;flex-direction:column;gap:8px;align-items:center;z-index:10005;opacity:0;pointer-events:none;transition:opacity 0.3s ease,transform 0.3s ease}
+.age-unlock-modal.visible{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+.age-unlock-modal strong{font-size:1rem;margin-bottom:0}
+.age-unlock-modal p{margin:0;font-size:0.9rem;color:#fef3c7}
+.age-unlock-modal .btn{background:rgba(255,255,255,0.12);border:none;box-shadow:none;font-size:0.85rem;padding:8px 20px}
+.messenger-link{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:18px 35px;background:linear-gradient(135deg,#f59e0b,#c2410c);color:#fff;border-radius:50px;font-weight:700;font-size:clamp(1rem,2vw,1.15rem);box-shadow:0 15px 30px rgba(245,158,11,0.3);transition:all 0.3s;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none}
+.messenger-link.is-disabled{opacity:0.45;cursor:not-allowed;filter:grayscale(0.4);box-shadow:none}
+@media(max-width:640px){
+.age-modal-content{width:95%;padding:18px 16px}
+.age-modal-title{font-size:1.4rem}
+.age-modal-text{font-size:0.95rem}
+.age-modal-actions .btn{font-size:0.9rem;padding:12px 20px}
+}
 footer{background:#040913;padding:40px 0;text-align:center;border-top:1px solid rgba(255,255,255,0.05)}
 @media(max-width:1024px){.hero-grid{grid-template-columns:1fr;text-align:center}.hero-img{max-width:500px;margin:0 auto}}
 @media(max-width:768px){.trust-grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr;gap:15px}.cards{grid-template-columns:1fr}.btn{padding:15px 28px;font-size:0.95rem}.hero-cta .btn{min-width:unset;flex:1 1 100%}.sticky-messengers{bottom:15px;right:15px;width:calc(100% - 30px)}.sticky-messengers .btn{width:100%;justify-content:center}.hero{padding:60px 0 80px}.hero-grid>div:first-child{order:2;margin-top:25px}.hero-grid>div:last-child{order:1}.hero-img{margin:0 auto 16px}.psychic-name{margin-top:10px;padding:12px 15px}.psychic-name-title{font-size:1.3rem}.psychic-name-subtitle{font-size:0.85rem}}
@@ -164,47 +205,12 @@ footer{background:#040913;padding:40px 0;text-align:center;border-top:1px solid 
 .company-info{background:rgba(245,158,11,0.1);padding:25px;border-radius:15px;border:1px solid rgba(245,158,11,0.3);margin:30px 0}
 .company-info p{margin-bottom:10px;color:#f5f5f7}
 @media(max-width:768px){.modal-content{margin:20px;padding:30px 20px}.modal-content h1{font-size:2rem}.modal-content h2{font-size:1.5rem}}
-.age-gate{padding:60px 0;background:linear-gradient(180deg,#151520,#0e0e15);position:relative}
-.age-gate::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(245,158,11,0.12),transparent 60%);opacity:0.7}
-.age-card{position:relative;z-index:1;max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 380px;gap:35px;padding:40px;border-radius:24px;background:rgba(13,13,20,0.85);border:1px solid rgba(245,158,11,0.15);box-shadow:0 30px 60px rgba(0,0,0,0.5)}
-.age-card::before{content:'';position:absolute;top:-20%;left:-5%;width:50%;height:50%;background:radial-gradient(circle,#f59e0b,transparent 70%);opacity:0.1;filter:blur(8px)}
-.age-info h2{font-size:clamp(1.6rem,3vw,2rem);margin-bottom:14px;color:#fff}
-.age-info p{font-size:0.95rem;color:#cbd5e1;margin-bottom:12px;line-height:1.6}
-.age-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);font-size:0.8rem;font-weight:700;color:#fde68a;margin-bottom:16px;text-transform:uppercase}
-.age-list{list-style:none;margin:16px 0 20px;padding:0}
-.age-list li{display:flex;align-items:flex-start;gap:8px;margin-bottom:10px;color:#cbd5e1;font-size:0.9rem}
-.age-list li::before{content:'✓';color:#f59e0b;font-weight:700}
-.age-panel{background:rgba(28,28,40,0.85);border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:14px}
-.age-photo{border-radius:14px;overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,0.4);margin-bottom:4px}
-.age-photo img{width:100%;height:240px;object-fit:cover;display:block}
-.age-status{padding:12px;border-radius:12px;background:rgba(250,204,21,0.08);border:1px solid rgba(250,204,21,0.25);text-align:center}
-.age-status strong{display:block;font-size:0.95rem;color:#f59e0b;margin-bottom:4px}
-.age-status p{margin:0;font-size:0.85rem;color:#fef3c7}
-.age-buttons{display:flex;flex-direction:column;gap:10px}
-.age-note{font-size:0.8rem;color:#a5b4cf;text-align:center;line-height:1.4}
-.consent-modal{position:fixed;inset:0;background:rgba(5,5,15,0.92);backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;z-index:10000;opacity:0;pointer-events:none;transition:opacity 0.3s}
-.consent-modal.is-open{opacity:1;pointer-events:auto}
-.consent-box{background:linear-gradient(135deg,rgba(12,12,20,0.98),rgba(12,12,25,0.98));border:1px solid rgba(245,158,11,0.3);border-radius:20px;max-width:400px;width:90%;padding:28px 26px;position:relative;box-shadow:0 30px 70px rgba(0,0,0,0.6)}
-.consent-box::after{content:'';position:absolute;inset:-25%;background:radial-gradient(circle,#f59e0b,transparent 60%);opacity:0.15;z-index:-1}
-.consent-badge{width:60px;height:60px;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#c2410c);display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#fff;box-shadow:0 12px 25px rgba(245,158,11,0.3);margin-bottom:16px}
-.consent-title{font-size:1.3rem;font-weight:700;margin-bottom:10px;color:#fff}
-.consent-text{font-size:0.9rem;color:#cbd5e1;margin-bottom:16px;line-height:1.5}
-.consent-check{display:flex;align-items:flex-start;gap:10px;font-size:0.85rem;color:#d1d5f9;margin-bottom:16px}
-.consent-check input{margin-top:2px;width:16px;height:16px;accent-color:#f59e0b}
-.consent-actions{display:flex;flex-direction:column;gap:10px}
-.consent-actions .btn{width:100%;font-size:0.95rem;padding:14px 28px}
-.consent-close{position:absolute;top:10px;right:14px;background:none;border:none;font-size:1.6rem;color:#94a3b8;cursor:pointer;transition:color 0.2s}
-.consent-close:hover{color:#fff}
 .contacts-locked .btn-wa,.contacts-locked .btn-tg,.contacts-locked .phone-link{pointer-events:none;opacity:0.5;filter:blur(3px);cursor:not-allowed}
 .contacts-locked .sticky-messengers{display:none}
 @media(max-width:768px){.age-card{grid-template-columns:1fr;padding:28px}.age-panel{order:1}.age-info{order:2}.age-photo img{height:200px}.hero-cta{flex-direction:column}.hero-cta .btn{min-width:unset;flex:1 1 100%}.sticky-messengers{bottom:15px;right:15px;left:15px;flex-direction:row}.sticky-messengers .btn{width:100%;flex:1}}
 </style>
 </head>
 <body>
-<div class="sticky-messengers">
-<a href="https://wa.me/79034892630" class="btn btn-wa" target="_blank" rel="noopener" data-wa="true">&#128172; Написать в WhatsApp</a>
-<a href="https://t.me/runa_dialog" class="btn btn-tg" target="_blank" rel="noopener" data-telegram="true">&#128273; Написать в Telegram</a>
-</div>
 <section class="hero">
         <div class="container">
         <div style="text-align:center;margin-bottom:15px">
@@ -224,20 +230,16 @@ footer{background:#040913;padding:40px 0;text-align:center;border-top:1px solid 
 <div class="trust-item"><span style="font-size:1.5rem">&#128737;</span><span style="font-size:0.85rem;font-weight:600">Щиты от зависти и конфликтов</span></div>
 <div class="trust-item"><span style="font-size:1.5rem">&#9993;</span><span style="font-size:0.85rem;font-weight:600">Поддержка лично в WhatsApp и Telegram</span></div>
         </div>
-        <div class="hero-cta">
-        <a href="https://wa.me/79034892630" class="btn btn-wa" target="_blank" rel="noopener" data-wa="true">&#128241; Написать в WhatsApp</a>
-        <a href="https://t.me/runa_dialog" class="btn btn-tg" target="_blank" rel="noopener" data-telegram="true">&#128273; Написать в Telegram</a>
-        </div>
-        <p style="margin-top:10px;color:#fde68a;font-size:0.95rem;font-weight:600">Выберите удобный мессенджер. Отвечаю сама и сопровождаю до результата.</p>
-        <a href="tel:+79034892630" class="phone-link" id="phoneLink">
-        <span style="font-size:1.5rem">&#9742;</span>
-        <span id="phoneDisplay">+7 (903) 489-26-30</span>
+<p style="margin-top:12px;color:#fde68a;font-size:0.95rem;font-weight:600">Сначала убеждаюсь, что общаюсь с взрослым человеком, и только после этого открываю реальные контакты в мессенджерах.</p>
+        <a href="#ageWidget" class="phone-link is-locked" id="phoneLink" data-open-age>
+        <span style="font-size:1.5rem">&#128222;</span>
+        <span id="phoneDisplay">Номер появится после подтверждения 18+</span>
         </a>
-        <p style="margin-top:12px;font-size:0.9rem">&#128339; Сегодня осталось 3 слота на личное сопровождение.</p>
+        <p style="margin-top:12px;font-size:0.9rem">&#9201; <strong style="color:#facc15">Сегодня беру не больше 5 историй</strong>, чтобы держать ситуацию под личным контролем.</p>
         <div class="address-info" id="addressInfo">
-        <strong>&#127970; Кабинет на Остоженке</strong>
-        <p id="addressDisplay">г. Москва, ул. Остоженка, д. 53, кабинет 8</p>
-        <p style="color:#22d3ee;font-weight:600">Работаю очно и онлайн по предварительной записи.</p>
+        <strong>&#128205; Место приема</strong>
+        <p id="addressDisplay">Адрес появится после подтверждения 18+</p>
+        <p style="color:#34d399;font-weight:600">&#128367; Основной формат: дистанционные сеансы по России и миру</p>
         </div>
         <div class="stats">
         <div class="stat"><span class="stat-num">1120</span><span class="stat-label">историй с улучшением</span></div>
@@ -275,52 +277,7 @@ footer{background:#040913;padding:40px 0;text-align:center;border-top:1px solid 
         </div>
         </section>
 
-<section class="age-gate">
-<div class="container">
-<div class="age-card">
-<div class="age-info">
-<span class="age-pill">🔞 Важное уведомление</span>
-<h2>Получение контактных данных</h2>
-<p>Для доступа к контактам и записи на приём требуется подтверждение возраста.</p>
-<ul class="age-list">
-<li>Быстрый доступ к WhatsApp и Telegram</li>
-<li>Абсолютная конфиденциальность</li>
-<li>Бесплатная первичная консультация</li>
-</ul>
-</div>
-<div class="age-panel">
-<div class="age-photo">
-<img src="https://raw.githubusercontent.com/antomimpuls/gadalkinov.ru/main/Screenshot_2.jpg" alt="Гадалка">
-</div>
-<div class="age-status">
-<strong>⚡ Приём сегодня</strong>
-<p>5 мест на консультацию</p>
-</div>
-<div class="age-buttons">
-<button class="btn" onclick="openAgeConsent()" style="background:linear-gradient(135deg,#f59e0b,#c2410c);box-shadow:0 10px 25px rgba(245,158,11,0.4)">🔓 Подтвердить 18+</button>
-</div>
-<p class="age-note">Нажимая кнопку, вы подтверждаете, что вам исполнилось 18 лет</p>
-</div>
-</div>
-</div>
-</section>
 
-<div class="consent-modal" id="ageConsentModal">
-<div class="consent-box">
-<button class="consent-close" onclick="closeAgeConsent()">&times;</button>
-<div class="consent-badge">18+</div>
-<h3 class="consent-title">Подтверждение возраста</h3>
-<p class="consent-text">Материалы сайта предназначены для лиц старше 18 лет. Подтвердите, что вам исполнилось 18 лет.</p>
-<label class="consent-check">
-<input type="checkbox" id="ageCheckbox">
-<span>Мне исполнилось 18 лет, я ознакомлен с условиями</span>
-</label>
-<div class="consent-actions">
-<button class="btn" id="confirmAgeBtn" onclick="confirmAge()" disabled style="background:linear-gradient(135deg,#f59e0b,#c2410c)">Подтвердить и продолжить</button>
-<button class="btn" onclick="closeAgeConsent()" style="background:rgba(255,255,255,0.1);box-shadow:none">Отмена</button>
-</div>
-</div>
-</div>
 
 <section class="section bg-alt">
         <div class="container">
@@ -559,169 +516,338 @@ footer{background:#040913;padding:40px 0;text-align:center;border-top:1px solid 
 <p style="text-align:center;margin-top:40px">Используя сайт, вы подтверждаете согласие с политикой конфиденциальности.</p>
 </div>
 </div>
+
+<div class="age-widget" id="ageWidget">
+  <button class="age-widget-btn" data-open-age>
+    <span class="age-widget-icon">18+</span>
+    <span class="age-widget-text">Подтвердите возраст</span>
+  </button>
+  <p class="age-widget-note">Это нужно для получения контактов и телефона.</p>
+</div>
+<div class="age-modal" id="ageModal">
+  <div class="age-modal-overlay" onclick="closeAgeModal()"></div>
+  <div class="age-modal-content">
+    <button type="button" class="age-modal-close" onclick="closeAgeModal()" aria-label="Закрыть">&times;</button>
+    <div class="age-modal-icon">18+</div>
+    <h2 class="age-modal-title">Подтвердите возраст</h2>
+    <p class="age-modal-text">Контакты показываются только взрослым. Подтвердите, что вам есть 18 лет.</p>
+    <p class="age-modal-note">После этого откроются WhatsApp и Telegram, номер телефона и адрес будут раскрыты.</p>
+    <label class="age-modal-checkbox">
+      <input type="checkbox" id="ageConfirmCheckbox">
+      <span>Мне исполнилось 18 лет, я принимаю условия</span>
+    </label>
+    <div class="age-modal-actions">
+      <button type="button" class="btn age-confirm-btn" id="ageConfirmBtn" disabled>Подтвердить и открыть контакты</button>
+      <button type="button" class="btn age-cancel-btn" onclick="closeAgeModal()">Отмена</button>
+    </div>
+  </div>
+</div>
+<div class="age-unlock-modal" id="ageUnlockModal">
+  <strong>Контакты разблокированы</strong>
+  <p>Теперь вы можете написать гадалке в WhatsApp и Telegram.</p>
+  <button class="btn" onclick="closeUnlockModal()">Понятно</button>
+</div>
+
 <script>
-(()=>{
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-    a.addEventListener('click',function(e){
-        e.preventDefault();
-        const t=this.getAttribute('href');
-        if(t==='#')return;
-        const el=document.querySelector(t);
-        if(el){window.scrollTo({top:el.offsetTop-80,behavior:'smooth'})}
+(() => {
+const SETTINGS = window.__SITE_SETTINGS__ || {};
+const YM_COUNTER = Number(SETTINGS.yandexMetrikaId || 0);
+const TARGET_WA_URL = window.__TARGET_WA_URL__;
+const TARGET_TG_URL = window.__TELEGRAM_URL__;
+const TG_ENABLED = window.__TELEGRAM_ENABLED__;
+const PHONE_NUMBER = SETTINGS.phoneNumber || '';
+const ADDRESS = SETTINGS.address || '';
+const FORMATTED_PHONE = formatPhoneNumber(PHONE_NUMBER);
+const ageWidget = document.getElementById('ageWidget');
+const ageModal = document.getElementById('ageModal');
+const ageUnlockModal = document.getElementById('ageUnlockModal');
+const AGE_KEY = 'gadal_age_confirmed_v3';
+const ageCheckbox = document.getElementById('ageConfirmCheckbox');
+const ageConfirmBtn = document.getElementById('ageConfirmBtn');
+const footerPrefix = 'Маг';
+const onlineWords = ['клиент', 'клиента', 'клиента', 'клиента'];
+const nameVariants = ['{{NAME}}', 'Маг {{NAME}}', 'Рунолог {{NAME}}', 'Гадалка {{NAME}}', 'Наставница {{NAME}}'];
+const onlineIntro = 'На связи';
+let ageConfirmed = localStorage.getItem(AGE_KEY) === '1';
+let sliderState = null;
+
+initAgeGate();
+initSmoothScroll();
+initSlider();
+initDynamicContent();
+
+function initAgeGate(){
+    applyAgeState();
+    document.querySelectorAll('[data-open-age]').forEach(btn => {
+        btn.addEventListener('click', evt => {
+            if (ageConfirmed) { return; }
+            evt.preventDefault();
+            openAgeModal();
+        });
     });
-});
-const TARGET_WA_URL=window.__TARGET_WA_URL__;
-const TARGET_TG_URL=window.__TELEGRAM_URL__;
-const waButtons=Array.from(document.querySelectorAll('[data-wa],.btn[href*="whatsapp"],.btn[href*="wa.me"]'));
-const handleWaClick=()=>{
-    if(typeof ym==='function'&&SITE_SETTINGS.yandexMetrikaId){
-        try{ym(SITE_SETTINGS.yandexMetrikaId,'reachGoal','wa_click')}catch(err){}
-    }
-};
-waButtons.forEach(btn=>{
-    if(btn.tagName==='A'){btn.href=TARGET_WA_URL;btn.target='_blank';btn.rel='noopener noreferrer'}
-    btn.addEventListener('click',handleWaClick)
-});
-const tgButtons=Array.from(document.querySelectorAll('[data-telegram],.btn[href*="t.me"],.btn[href*="telegram.me"]'));
-const handleTgClick=()=>{
-    if(typeof ym==='function'&&SITE_SETTINGS.yandexMetrikaId){
-        try{ym(SITE_SETTINGS.yandexMetrikaId,'reachGoal','tg_click')}catch(err){}
-    }
-};
-if(TARGET_TG_URL){
-    tgButtons.forEach(btn=>{
-        if(btn.tagName==='A'){btn.href=TARGET_TG_URL;btn.target='_blank';btn.rel='noopener noreferrer'}
-        btn.addEventListener('click',handleTgClick)
+    const waButtons = Array.from(document.querySelectorAll('[data-wa],.btn-wa'));
+    const tgButtons = Array.from(document.querySelectorAll('[data-telegram],.btn-tg'));
+    waButtons.forEach(btn => {
+        btn.addEventListener('click', evt => {
+            if (!ageConfirmed) { evt.preventDefault(); openAgeModal(); return; }
+            if (typeof ym === 'function' && YM_COUNTER) {
+                try { ym(YM_COUNTER, 'reachGoal', 'wa_click'); } catch (err) {}
+            }
+        });
     });
-}else{
-    tgButtons.forEach(btn=>{btn.style.display='none'});
-    document.querySelectorAll('.sticky-messengers').forEach(sticky=>{
-        const hasVisible=Array.from(sticky.children).some(child=>child.style.display!=='none');
-        if(!hasVisible){sticky.style.display='none'}
+    tgButtons.forEach(btn => {
+        btn.addEventListener('click', evt => {
+            if (!ageConfirmed) { evt.preventDefault(); openAgeModal(); return; }
+            if (typeof ym === 'function' && YM_COUNTER) {
+                try { ym(YM_COUNTER, 'reachGoal', 'tg_click'); } catch (err) {}
+            }
+        });
+    });
+    if (ageCheckbox && ageConfirmBtn) {
+        ageCheckbox.addEventListener('change', () => { ageConfirmBtn.disabled = !ageCheckbox.checked; });
+    }
+    if (ageConfirmBtn) { ageConfirmBtn.addEventListener('click', confirmAgeAccess); }
+    document.addEventListener('keydown', evt => {
+        if (evt.key === 'Escape') { closeAgeModal(); closeUnlockModal(); }
     });
 }
-const animateOnScroll=()=>{
-    document.querySelectorAll('.card,.testimonial,.hero-img').forEach(el=>{
-        const top=el.getBoundingClientRect().top;
-        if(top<window.innerHeight-100){el.style.opacity='1';el.style.transform='translateY(0)'}
-    })
-};
-window.addEventListener('load',()=>{
-    document.querySelectorAll('.card,.testimonial').forEach(c=>{
-        c.style.opacity='0';
-        c.style.transform='translateY(20px)';
-        c.style.transition='opacity 0.5s ease,transform 0.5s ease'
-    });
-    const img=document.querySelector('.hero-img');
-    if(img){
-        img.style.opacity='0';
-        img.style.transform='translateY(30px)';
-        img.style.transition='opacity 0.8s ease,transform 0.8s ease';
-        setTimeout(()=>{img.style.opacity='1';img.style.transform='translateY(0)'},300)
+
+function applyAgeState(){
+    const waButtons = Array.from(document.querySelectorAll('[data-wa],.btn-wa'));
+    const tgButtons = Array.from(document.querySelectorAll('[data-telegram],.btn-tg'));
+    if (ageConfirmed) {
+        waButtons.forEach(btn => { btn.href = TARGET_WA_URL; btn.target = '_blank'; btn.rel = 'noopener noreferrer'; });
+        if (TG_ENABLED) {
+            tgButtons.forEach(btn => { btn.href = TARGET_TG_URL; btn.target = '_blank'; btn.rel = 'noopener noreferrer'; });
+        } else {
+            tgButtons.forEach(btn => { btn.style.display = 'none'; });
+        }
+    } else {
+        waButtons.forEach(btn => { btn.href = '#ageWidget'; btn.removeAttribute('target'); btn.removeAttribute('rel'); });
+        tgButtons.forEach(btn => { btn.href = '#ageWidget'; btn.removeAttribute('target'); btn.removeAttribute('rel'); });
     }
-    setTimeout(animateOnScroll,500)
-});
-window.addEventListener('scroll',animateOnScroll);
-})();
-let currentSlide=0;const totalSlides=8;
-const onlineWords=["клиент","клиента","клиента","клиента"];
-const nameVariants=["{{NAME}}","Маг {{NAME}}","Рунолог {{NAME}}","Гадалка {{NAME}}","Наставница {{NAME}}"]
-const footerPrefix="Маг";
-const onlineIntro="На связи";
-function initSlider(){
-    const dotsContainer=document.getElementById('sliderDots');
-    for(let i=0;i<totalSlides;i++){
-        const dot=document.createElement('button');
-        dot.className='slider-dot';
-        if(i===0)dot.classList.add('active');
-        dot.onclick=()=>goToSlide(i);
-        dotsContainer.appendChild(dot)
-    }
-    updateSlider()
+    if (ageWidget) { ageWidget.style.display = ageConfirmed ? 'none' : 'flex'; }
+    document.body.classList.toggle('contacts-locked', !ageConfirmed);
+    updateContactLinks();
 }
-function moveSlide(direction){
-    currentSlide+=direction;
-    if(currentSlide<0)currentSlide=totalSlides-1;
-    if(currentSlide>=totalSlides)currentSlide=0;
-    updateSlider()
-}
-function goToSlide(index){currentSlide=index;updateSlider()}
-function updateSlider(){
-    const slider=document.getElementById('testimonialSlider');
-    const dots=document.querySelectorAll('.slider-dot');
-    slider.style.transform=`translateX(-${currentSlide*100}%)`;
-    dots.forEach((dot,index)=>{dot.classList.toggle('active',index===currentSlide)})
-}
-function replaceNamePlaceholders(name){
-    if(!name)return;
-    const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null);
-    const targets=[];
-    while(walker.nextNode()){targets.push(walker.currentNode)}
-    targets.forEach(node=>{
-        if(!node.nodeValue||node.nodeValue.indexOf('{{NAME}}')===-1)return;
-        const parent=node.parentElement||node.parentNode;
-        if(parent&&parent.closest('.testimonial'))return;
-        node.nodeValue=node.nodeValue.replace(/{{NAME}}/g,name)
-    })
-}
-window.addEventListener('load',()=>{
-    initSlider();
-    const psychicName=SITE_SETTINGS.psychicName||"Марфа Васильевна";
-    replaceNamePlaceholders(psychicName);
-    const heroName=document.getElementById('heroName');
-    if(heroName){
-        const titleEl=heroName.querySelector('.psychic-name-title');
-        if(titleEl)titleEl.textContent=psychicName
+
+function updateContactLinks(){
+    const phoneDisplay = document.getElementById('phoneDisplay');
+    const phoneLink = document.getElementById('phoneLink');
+    if (phoneDisplay) {
+        phoneDisplay.textContent = (ageConfirmed && FORMATTED_PHONE) ? FORMATTED_PHONE : 'Номер появится после подтверждения 18+';
     }
-    const footerName=document.getElementById('footerName');
-    if(footerName&&psychicName){footerName.textContent=`${footerPrefix} ${psychicName}`}
-    const legalEntity=document.getElementById('legalEntity');
-    if(legalEntity&&psychicName){legalEntity.textContent=`ИП ${psychicName}`}
-    const phoneNum=SITE_SETTINGS.phoneNumber;
-    if(phoneNum){
-        const formatted=formatPhoneNumber(phoneNum);
-        const phoneDisplay=document.getElementById('phoneDisplay');
-        const phoneLink=document.getElementById('phoneLink');
-        if(phoneDisplay)phoneDisplay.textContent=formatted;
-        if(phoneLink)phoneLink.href=`tel:${phoneNum}`
-    }
-    const address=SITE_SETTINGS.address;
-    if(address){
-        const addressDisplay=document.getElementById('addressDisplay');
-        if(addressDisplay)addressDisplay.textContent=address
-    }
-    const psychicImg=document.getElementById('psychicImage');
-    if(psychicImg&&SITE_SETTINGS.psychicImageURL){psychicImg.src=SITE_SETTINGS.psychicImageURL}
-    const responseNode=document.getElementById('responseTimeDisplay');if(responseNode){responseNode.textContent=SITE_SETTINGS.responseTime||'5-10 минут'}
-    function updateOnlineCount(){
-        const count=Math.floor(Math.random()*4)+1;
-        const onlineCount=document.getElementById('onlineCount');
-        if(onlineCount){
-            const word=onlineWords[count-1]||onlineWords[onlineWords.length-1];
-            onlineCount.textContent=count;
-            onlineCount.parentElement.innerHTML=`${onlineIntro}: <strong>${count}</strong> ${word}`
+    if (phoneLink) {
+        if (ageConfirmed && PHONE_NUMBER) {
+            phoneLink.href = `tel:${PHONE_NUMBER}`;
+            phoneLink.classList.remove('is-locked');
+        } else {
+            phoneLink.href = '#ageWidget';
+            if (!phoneLink.classList.contains('is-locked')) {
+                phoneLink.classList.add('is-locked');
+            }
+            phoneLink.removeAttribute('target');
         }
     }
-    updateOnlineCount();
-    setInterval(updateOnlineCount,45000)
-});
-setInterval(()=>{moveSlide(1)},8000);
-setTimeout(()=>{
-    const name=SITE_SETTINGS.psychicName;
-    if(name){
-        let idx=0;
-        document.querySelectorAll('.testimonial p').forEach(p=>{
-            const text=p.innerHTML;
-            p.innerHTML=text.replace(/{{NAME}}/g,()=>{
-                const template=nameVariants[idx++%nameVariants.length]||nameVariants[0];
-                return template.replace(/{{NAME}}/g,name)
-            })
-        })
+    const addressDisplay = document.getElementById('addressDisplay');
+    if (addressDisplay) {
+        addressDisplay.textContent = (ageConfirmed && ADDRESS) ? ADDRESS : 'Адрес появится после подтверждения 18+';
     }
-},100);
-function openPrivacyModal(){document.getElementById('privacyModal').style.display='block';document.body.style.overflow='hidden'}
-function closePrivacyModal(){document.getElementById('privacyModal').style.display='none';document.body.style.overflow='auto'}
-window.onclick=function(e){const modal=document.getElementById('privacyModal');if(e.target==modal){closePrivacyModal()}}
+}
+
+function openAgeModal(){
+    if (!ageModal) return;
+    ageModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    if (ageCheckbox) { ageCheckbox.checked = false; }
+    if (ageConfirmBtn) { ageConfirmBtn.disabled = true; }
+}
+
+function closeAgeModal(){
+    if (!ageModal) return;
+    ageModal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function confirmAgeAccess(){
+    if (!ageCheckbox || !ageCheckbox.checked || !ageConfirmBtn || ageConfirmBtn.disabled) return;
+    ageConfirmed = true;
+    localStorage.setItem(AGE_KEY, '1');
+    applyAgeState();
+    closeAgeModal();
+    openUnlockModal();
+}
+
+function openUnlockModal(){
+    if (!ageUnlockModal) return;
+    ageUnlockModal.classList.add('visible');
+    setTimeout(closeUnlockModal, 5200);
+}
+
+function closeUnlockModal(){
+    if (!ageUnlockModal) return;
+    ageUnlockModal.classList.remove('visible');
+}
+
+function initSmoothScroll(){
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e){
+            const href = this.getAttribute('href');
+            if (!href || href === '#') return;
+            const target = document.querySelector(href);
+            if (target) { e.preventDefault(); window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' }); }
+        });
+    });
+}
+
+function initSlider(){
+    const slider = document.getElementById('testimonialSlider');
+    const dotsContainer = document.getElementById('sliderDots');
+    if (!slider || !dotsContainer) return;
+    const totalSlides = slider.children.length;
+    if (!totalSlides) return;
+    sliderState = { slider, dotsContainer, totalSlides, currentSlide: 0, intervalId: null };
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'slider-dot';
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+    }
+    updateSlider();
+    sliderState.intervalId = setInterval(() => moveSlide(1), 8000);
+}
+
+function moveSlide(direction){
+    if (!sliderState) return;
+    sliderState.currentSlide += direction;
+    if (sliderState.currentSlide < 0) sliderState.currentSlide = sliderState.totalSlides - 1;
+    if (sliderState.currentSlide >= sliderState.totalSlides) sliderState.currentSlide = 0;
+    updateSlider();
+}
+window.moveSlide = moveSlide;
+
+function goToSlide(index){
+    if (!sliderState) return;
+    sliderState.currentSlide = index;
+    updateSlider();
+}
+window.goToSlide = goToSlide;
+
+function updateSlider(){
+    if (!sliderState) return;
+    const { slider, dotsContainer, currentSlide } = sliderState;
+    slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+    dotsContainer.querySelectorAll('.slider-dot').forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === currentSlide);
+    });
+}
+
+function initDynamicContent(){
+    setupReveal();
+    setImagesAndTexts();
+    startOnlineCounter();
+}
+
+function setupReveal(){
+    const revealTargets = document.querySelectorAll('.card,.testimonial,.hero-img');
+    revealTargets.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.5s ease,transform 0.5s ease';
+    });
+    const heroImg = document.querySelector('.hero-img');
+    if (heroImg) {
+        heroImg.style.opacity = '0';
+        heroImg.style.transform = 'translateY(30px)';
+        heroImg.style.transition = 'opacity 0.8s ease,transform 0.8s ease';
+        setTimeout(() => { heroImg.style.opacity = '1'; heroImg.style.transform = 'translateY(0)'; }, 300);
+    }
+    const animate = () => {
+        revealTargets.forEach(el => {
+            const top = el.getBoundingClientRect().top;
+            if (top < window.innerHeight - 120) {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }
+        });
+    };
+    setTimeout(animate, 500);
+    window.addEventListener('scroll', animate);
+}
+
+function setImagesAndTexts(){
+    const psychicName = SETTINGS.psychicName || 'Римма Ивановна';
+    const heroName = document.getElementById('heroName');
+    if (heroName) {
+        const titleEl = heroName.querySelector('.psychic-name-title');
+        if (titleEl) titleEl.textContent = psychicName;
+    }
+    const footerName = document.getElementById('footerName');
+    if (footerName) { footerName.textContent = `${footerPrefix} ${psychicName}`; }
+    const legalEntity = document.getElementById('legalEntity');
+    if (legalEntity) { legalEntity.textContent = `ИП ${psychicName}`; }
+    updateContactLinks();
+    const psychicImg = document.getElementById('psychicImage');
+    if (psychicImg && SETTINGS.psychicImageURL) { psychicImg.src = SETTINGS.psychicImageURL; }
+    const responseNode = document.getElementById('responseTimeDisplay');
+    if (responseNode) { responseNode.textContent = SETTINGS.responseTime || '5-10 минут'; }
+    setTimeout(() => {
+        if (psychicName) {
+            let idx = 0;
+            document.querySelectorAll('.testimonial p').forEach(p => {
+                const text = p.innerHTML;
+                p.innerHTML = text.replace(/{{NAME}}/g, () => {
+                    const template = nameVariants[idx++ % nameVariants.length] || nameVariants[0];
+                    return template.replace(/{{NAME}}/g, psychicName);
+                });
+            });
+        }
+    }, 100);
+}
+
+function startOnlineCounter(){
+    updateOnlineCount();
+    setInterval(updateOnlineCount, 45000);
+}
+
+function updateOnlineCount(){
+    const count = Math.floor(Math.random() * 4) + 1;
+    const onlineCount = document.getElementById('onlineCount');
+    if (onlineCount) {
+        const word = onlineWords[count - 1] || onlineWords[onlineWords.length - 1];
+        onlineCount.textContent = count;
+        if (onlineCount.parentElement) {
+            onlineCount.parentElement.innerHTML = `${onlineIntro}: <strong>${count}</strong> ${word}`;
+        }
+    }
+}
+
+function openPrivacyModal(){
+    const modal = document.getElementById('privacyModal');
+    if (modal) { modal.style.display = 'block'; document.body.style.overflow = 'hidden'; }
+}
+
+function closePrivacyModal(){
+    const modal = document.getElementById('privacyModal');
+    if (modal) { modal.style.display = 'none'; document.body.style.overflow = 'auto'; }
+}
+
+document.addEventListener('click', e => {
+    const modal = document.getElementById('privacyModal');
+    if (modal && e.target === modal) { closePrivacyModal(); }
+});
+
+window.openPrivacyModal = openPrivacyModal;
+window.closePrivacyModal = closePrivacyModal;
+window.openAgeModal = openAgeModal;
+window.closeAgeModal = closeAgeModal;
+window.confirmAgeAccess = confirmAgeAccess;
+window.openUnlockModal = openUnlockModal;
+window.closeUnlockModal = closeUnlockModal;
+
+})();
 </script>
 <script type="text/javascript">
 if(SITE_SETTINGS.yandexMetrikaId){
@@ -736,13 +862,7 @@ ym(SITE_SETTINGS.yandexMetrikaId,"init",{clickmap:true,trackLinks:true,accurateT
 <noscript><div><img src="https://mc.yandex.ru/watch/104842405" style="position:absolute;left:-9999px;" alt="" id="ymImg"/></div></noscript>
 <script>if(SITE_SETTINGS.yandexMetrikaId){document.getElementById('ymImg').src=`https://mc.yandex.ru/watch/${SITE_SETTINGS.yandexMetrikaId}`}</script>
 
-<script>
-function openAgeConsent(){document.getElementById('ageConsentModal').classList.add('is-open');document.body.style.overflow='hidden'}
-function closeAgeConsent(){document.getElementById('ageConsentModal').classList.remove('is-open');document.body.style.overflow='auto'}
-function confirmAge(){const checkbox=document.getElementById('ageCheckbox');if(checkbox.checked){localStorage.setItem('ageConfirmed','true');document.body.classList.remove('contacts-locked');closeAgeConsent();document.querySelector('.age-gate').style.display='none';window.scrollTo({top:document.querySelector('.section.bg-alt').offsetTop-100,behavior:'smooth'})}}
-document.getElementById('ageCheckbox').addEventListener('change',function(){document.getElementById('confirmAgeBtn').disabled=!this.checked});
-window.addEventListener('load',function(){if(localStorage.getItem('ageConfirmed')==='true'){document.querySelector('.age-gate').style.display='none'}else{document.body.classList.add('contacts-locked')}});
-</script>
+
 
 </body>
 </html>
